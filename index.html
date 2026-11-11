@@ -1,0 +1,971 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}
+/* User-selected theme accent: color controls and selected template accents */
+.cv{--user-accent:#1c2539}
+.t1 .side,.t1 .cap,.t1 .hdr{background:var(--user-accent)!important}.t1 .main .sh span{background:var(--user-accent)!important}.t1 .main .sh span::after{border-inline-start-color:var(--user-accent)!important}.t1 .main .sh i,.t1 .main .sh i::after,.t1 .e.tl .dot{background:var(--user-accent)!important}.t1 .side .ic{color:var(--user-accent)!important}
+.t2 .vl{background:linear-gradient(var(--user-accent) 0 56px,transparent 56px 220px,var(--user-accent) 220px)!important}.t2 .tag,.t2 .foot{background:var(--user-accent)!important}.t2 .sh i,.t2 .sh i::after{background:var(--user-accent)!important}.t2 .side .ic{background:var(--user-accent)!important}
+.t4 .side{background:color-mix(in srgb,var(--user-accent) 18%,white)!important}.t4 .gap{background:color-mix(in srgb,var(--user-accent) 8%,white)!important}.t4 .side .ph{border-color:var(--user-accent)!important}.t4 .main .sh{background:color-mix(in srgb,var(--user-accent) 8%,white)!important}
+.t5 .side{background:var(--user-accent)!important}.t5 .hd .nm,.t5 .main .sh{color:var(--user-accent)!important}
+.t6 .hd{border-color:var(--user-accent)!important}.t6 .nm,.t6 .sh{color:var(--user-accent)!important}.t6 .sh{border-color:var(--user-accent)!important}
+</style></head><body>
+<title>ResumeCraft Studio</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700;800&family=Lato:wght@400;700;900&display=swap">
+<script src="docx.iife.js"></script>
+<style>
+/* Layout: workbench. Form pane on the start side, live A4 preview on the other; phone gets two tabs. */
+:root{
+  --bg:#f4f5f7; --surface:#ffffff; --ink:#16213a; --muted:#5d6779; --line:#dde1e8;
+  --accent:#16507a; --accent-ink:#ffffff; --accent-soft:#e3eef7; --ok:#1d7a4d; --warn:#a15c07;
+  --field:#f8f9fb; --shadow:0 1px 2px rgba(20,30,50,.06),0 8px 24px rgba(20,30,50,.07);
+  --f-ui:'Cairo','Segoe UI',Tahoma,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0f141d; --surface:#171e2b; --ink:#e8ecf3; --muted:#9aa5b8; --line:#2a3447;
+  --accent:#6fb4e6; --accent-ink:#0b1320; --accent-soft:#1c2a3d; --ok:#5fd09a; --warn:#e3a553;
+  --field:#1c2535; --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.35); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f141d; --surface:#171e2b; --ink:#e8ecf3; --muted:#9aa5b8; --line:#2a3447;
+  --accent:#6fb4e6; --accent-ink:#0b1320; --accent-soft:#1c2a3d; --ok:#5fd09a; --warn:#e3a553;
+  --field:#1c2535; --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.35); color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-ui);font-size:15px;line-height:1.6;
+  padding-block:0 84px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:30}
+.app{max-width:1280px;margin:0 auto}
+button,input,textarea,select{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding-block:18px 10px}
+.brand{display:flex;align-items:center;gap:10px}
+.brand .mk{width:36px;height:36px;border-radius:9px;background:var(--accent);color:var(--accent-ink);display:grid;place-items:center;font-weight:800;font-size:15px}
+.brand h1{font-size:19px;line-height:1.2;margin:0;font-weight:800}
+.brand p{margin:0;color:var(--muted);font-size:12.5px}
+.seg{display:inline-flex;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:3px;gap:3px}
+.seg button{border:0;background:transparent;padding:6px 16px;border-radius:7px;font-weight:600;color:var(--muted)}
+.seg button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
+.langbox{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.langbox small{color:var(--muted);font-size:12.5px}
+
+.tpls{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px;margin-block:8px 16px}
+.tpl{background:var(--surface);border:2px solid var(--line);border-radius:12px;padding:8px;text-align:center;display:flex;flex-direction:column;gap:6px;align-items:center}
+.tpl[aria-pressed="true"]{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.tpl .th{width:100%;aspect-ratio:3/4;border-radius:5px;border:1px solid var(--line);display:grid;position:relative;overflow:hidden;background:#fff;direction:ltr}
+.tpl span{font-size:12.5px;font-weight:600;line-height:1.3}
+.th i{display:block}
+.th.a{grid-template-columns:42% 1fr}.th.a i:first-child{background:#1c2539}.th.a::after{content:"";position:absolute;inset:0 0 auto 0;height:16%;top:15%;background:#1c2539;opacity:.9}
+.th.b{grid-template-columns:38% 1fr}.th.b i:first-child{background:linear-gradient(#ddd 0 38%,#23282e 38%)}.th.b::after{content:"";position:absolute;inset:0 0 auto auto;width:12%;height:22%;background:#b8a58c}
+.th.c{grid-template-columns:8% 40% 1fr}.th.c i:nth-child(2){background:linear-gradient(#5b5b5b 0 40%,#000 40%);margin-bottom:12%}.th.c::after{content:"";position:absolute;inset:auto 0 0 0;height:9%;background:#000}
+.th.d{grid-template-columns:40% 1fr}.th.d i:first-child{background:#ebdcf5}.th.d::after{content:"";position:absolute;inset:14% auto auto 8%;width:24%;height:26%;border:2px solid #8f6a9f;background:#f4e9fa}
+.th.e{grid-template-columns:24% 1fr}.th.e i:first-child{background:#1f2a44;margin-bottom:28%}.th.e::after{content:"";position:absolute;inset:10% 8% auto auto;width:40%;height:4px;background:#1f2a44}
+
+.th.f{display:block;background:linear-gradient(#1a2b4a,#1a2b4a) 50% 12%/46% 5% no-repeat,linear-gradient(#9aa3b2,#9aa3b2) 50% 21%/58% 2.5% no-repeat,repeating-linear-gradient(#cfd5df 0 3px,transparent 3px 9px) 50% 78%/76% 56% no-repeat,#fff}.th.f i{display:none}
+.work{display:grid;grid-template-columns:minmax(0,460px) minmax(0,1fr);gap:20px;align-items:start}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:var(--shadow)}
+.card + .card{margin-top:14px}
+.card h2{font-size:16px;margin:0 0 12px;font-weight:700;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.card h2 small{font-weight:500;color:var(--muted);font-size:12px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.f{display:flex;flex-direction:column;gap:4px;min-width:0}
+.f>span{font-size:12.5px;color:var(--muted);font-weight:600}
+.f input,.f textarea{background:var(--field);border:1px solid var(--line);border-radius:9px;padding:8px 10px;min-width:0;width:100%}
+.f textarea{resize:vertical;min-height:74px;line-height:1.5}
+.f input[type=range]{padding:0;accent-color:var(--accent);height:30px;background:transparent;border:0}
+.full{grid-column:1/-1}
+.item{border:1px solid var(--line);border-radius:11px;padding:12px;background:var(--field);display:flex;flex-direction:column;gap:10px}
+.item + .item{margin-top:10px}
+.item.row{flex-direction:row;align-items:flex-end;gap:10px;padding:10px}
+.item.row .f:first-child{flex:1.2}.item.row .f:nth-child(2){flex:1}
+.btn{border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:8px 14px;font-weight:600;display:inline-flex;align-items:center;justify-content:center;gap:6px;text-decoration:none;color:var(--ink)}
+.btn.pri{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.wa{background:#1f9d55;border-color:#1f9d55;color:#fff}
+.btn.sm{padding:4px 10px;font-size:13px}
+.btn.del{color:#b3261e;border-color:transparent;background:transparent;padding:4px 8px}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.add{margin-top:10px;width:100%;border-style:dashed;color:var(--accent)}
+.photo-row{display:flex;align-items:center;gap:14px}
+.photo-prev{width:84px;height:104px;border-radius:10px;background:var(--field) center/cover no-repeat;border:1px solid var(--line);flex:none;display:grid;place-items:center;color:var(--muted);font-size:12px;text-align:center}
+.certs{display:grid;grid-template-columns:repeat(auto-fill,minmax(86px,1fr));gap:8px;margin-top:10px}
+.cert-t{position:relative;aspect-ratio:3/4;border-radius:8px;border:1px solid var(--line);background:var(--field) center/cover no-repeat}
+.cert-t button{position:absolute;top:4px;inset-inline-end:4px;width:24px;height:24px;border-radius:50%;border:0;background:rgba(0,0,0,.65);color:#fff;line-height:1}
+.hint{color:var(--muted);font-size:12.5px;margin:6px 0 0}
+.sample-note{background:var(--accent-soft);border-radius:10px;padding:8px 12px;font-size:13px;display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-bottom:14px}
+.ai-box{border:1px solid var(--accent);background:var(--accent-soft);border-radius:14px;padding:14px;margin-bottom:14px}
+.ai-box h2{margin-bottom:4px}
+.ai-box p{margin:0 0 10px;font-size:13px;color:var(--muted)}
+.saved{display:flex;flex-direction:column;gap:8px;margin-top:10px}
+.saved .s{display:flex;gap:8px;align-items:center;justify-content:space-between;border:1px solid var(--line);border-radius:10px;padding:6px 10px;background:var(--field)}
+.saved .s b{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+.prev{position:sticky;top:calc(env(safe-area-inset-top,0px) + 10px)}
+.actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:10px}
+.wa-row{display:flex;gap:8px;flex-wrap:wrap;align-items:flex-end;margin-bottom:10px}
+.wa-row .f{flex:1;min-width:150px}
+.status{font-size:13px;color:var(--muted);min-height:20px;margin-bottom:8px}
+.status.err{color:#b3261e}.status.ok{color:var(--ok)}
+.stage{background:repeating-conic-gradient(var(--line) 0 25%,transparent 0 50%) 0 0/20px 20px;border:1px solid var(--line);border-radius:14px;padding:12px;overflow:hidden;max-height:calc(100vh - 190px);overflow-y:auto}
+.scaler{direction:ltr;position:relative;margin:0 auto}
+#pages{position:absolute;top:0;left:0;width:794px;transform-origin:top left;display:flex;flex-direction:column;gap:18px}
+.bottom-tabs{display:none}
+@media (max-width:980px){
+  .work{grid-template-columns:minmax(0,1fr)}
+  .prev{position:static}
+  .stage{max-height:none}
+  .work[data-tab="form"] .prev{display:none}
+  .work[data-tab="prev"] .formpane{display:none}
+  .bottom-tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;position:fixed;inset:auto 0 0 0;background:var(--surface);border-top:1px solid var(--line);z-index:20;
+    padding:8px max(16px,env(safe-area-inset-right,0px)) calc(8px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+  .bottom-tabs button{border:0;border-radius:10px;padding:10px;font-weight:700;background:var(--field);color:var(--muted)}
+  .bottom-tabs button[aria-selected="true"]{background:var(--accent);color:var(--accent-ink)}
+  .tpls{grid-template-columns:repeat(6,minmax(86px,1fr));overflow-x:auto;padding-bottom:4px}
+}
+@media (max-width:560px){.grid2{grid-template-columns:1fr}.item.row{flex-wrap:wrap}.item.row .f{flex:1 1 100%!important}}
+.imgov{position:fixed;inset:0;z-index:60;background:var(--bg);overflow-y:auto;padding:calc(16px + env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) 40px max(16px,env(safe-area-inset-left,0px))}
+.imgov .bx{max-width:560px;margin:0 auto;display:flex;flex-direction:column;gap:12px}
+.imgov img{width:100%;height:auto;border:1px solid var(--line);border-radius:8px;background:#fff;-webkit-touch-callout:default;user-select:auto}
+.imgov .note{background:var(--accent-soft);border-radius:10px;padding:10px 14px;font-size:14px}
+.toast{position:fixed;inset-inline:16px;bottom:calc(76px + env(safe-area-inset-bottom,0px));margin:0 auto;max-width:420px;background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:10px;text-align:center;z-index:40;font-weight:600}
+
+/* ========== CV templates (A4 = 794 x 1123 px) ========== */
+.cv{width:794px;min-height:1123px;background:#fff;position:relative;overflow:hidden;display:grid;font-size:12.5px;line-height:1.55;color:#222;font-family:var(--f);text-align:start}
+.cv *{box-sizing:border-box;margin:0}
+.cv[dir=ltr]{--f:'Poppins','Cairo',sans-serif}
+.cv[dir=rtl]{--f:'Cairo','Tajawal',sans-serif}
+.cv[dir=rtl] *{letter-spacing:0!important}
+.cv .ph{background-size:cover;background-position:center;background-color:#d9d9d9;display:block}
+.cv .ph.empty{display:grid;place-items:center}
+.cv .ph.empty svg{width:46%;height:auto;fill:#a8a8a8}
+.cv .sh i{display:none}
+.cv .sec{margin-bottom:20px}
+.cv .e{margin-bottom:12px}
+.cv .e p{margin-top:3px}
+.cv ul{padding-inline-start:0;list-style:none}
+.cv ul.dl li::before{content:"- ";}
+.cv ul.bl{padding-inline-start:15px;list-style:disc}
+.cv ul.bl li::before{content:none}
+.cv .bar{height:6px;background:var(--bt);overflow:hidden}
+.cv .bar b{display:block;height:100%;background:var(--bf)}
+.cv .sk{display:grid;grid-template-columns:1fr 120px;gap:10px;align-items:center;margin-bottom:7px}
+.cv .ic{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;flex:none}
+.cv .ic svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.cv .il{display:flex;align-items:center;gap:10px;margin-bottom:9px;word-break:break-word}
+.cv .il span{min-width:0;direction:ltr;unicode-bidi:plaintext}
+.cv[dir=rtl] .il span{direction:rtl}
+
+/* ---- T1: navy hexagon ---- */
+.t1{grid-template-columns:332px 1fr;--navy:#1c2539;--bt:transparent;--bf:#fff}
+.t1 .side{background:var(--navy);color:#fff;padding:322px 34px 36px}
+.t1 .main{padding:262px 34px 34px 28px}
+.t1[dir=rtl] .main{padding:262px 28px 34px 34px}
+.t1 .cap{position:absolute;top:0;inset-inline:332px 0;height:31px;background:var(--navy)}
+.t1 .hdr{position:absolute;top:115px;inset-inline:0;height:123px;background:var(--navy);color:#fff;padding-inline:290px 34px;display:flex;flex-direction:column;justify-content:center;gap:4px}
+.t1 .nm{font-size:32px;font-weight:800;line-height:1.15;text-transform:uppercase;overflow-wrap:anywhere}
+.t1 .tt{display:flex;align-items:center;gap:14px;font-size:19px;font-weight:300}
+.t1 .tt i{display:block;flex:1;height:2px;background:#fff}
+.t1 .hexs{position:absolute;top:38px;inset-inline-start:34px;width:232px;height:268px}
+.t1 .hexs svg{display:block;width:100%;height:100%}
+.t1 .side .sh{font-size:22px;font-weight:300;border-bottom:2px solid #fff;width:62%;padding-bottom:5px;margin-bottom:16px;line-height:1.3}
+.t1 .side .sec{margin-bottom:28px}
+.t1 .side .ic{background:#fff;color:var(--navy)}
+.t1 .side .il{font-weight:700;font-size:12.5px}
+.t1 .side .sk{display:block;margin-bottom:10px}
+.t1 .side .sk .n{display:flex;align-items:center;gap:8px;justify-content:center;font-size:11.5px;margin-bottom:3px}
+.t1 .side .sk .n::before,.t1 .side .sk .n::after{content:"";width:26px;height:1px;background:#fff}
+.t1 .side .sk .bar{height:14px;border:1px solid #fff;padding:4px 4px;background:transparent}
+.t1 .side .sk .bar b{height:2px;margin-top:2px}
+.t1 .lcs{display:flex;flex-wrap:wrap;gap:12px 14px}
+.t1 .lc{text-align:center;font-size:12px;width:66px}
+.t1 .main .sh{display:flex;align-items:center;margin-bottom:12px}
+.t1 .main .sh span{background:var(--navy);color:#fff;font-weight:700;font-size:20px;padding:2px 14px;line-height:1.35;position:relative;margin-inline-end:14px}
+.t1 .main .sh span::after{content:"";position:absolute;inset-inline-start:100%;top:0;border-block:15px solid transparent;border-inline-start:14px solid var(--navy)}
+.t1 .main .sh i{display:block;flex:1;height:2px;background:var(--navy);position:relative}
+.t1 .main .sh i::after{content:"";position:absolute;inset-inline-end:0;top:-5px;width:12px;height:12px;border-radius:50%;background:var(--navy)}
+.t1 .e.tl{display:grid;grid-template-columns:56px 14px 1fr;gap:8px;position:relative}
+.t1 .e.tl::before{content:"";position:absolute;inset-block:20px 0;inset-inline-start:67px;width:1px;background:#ccd1da}
+.t1 .e.tl .dt{font-size:11px;color:#444;line-height:1.35;padding-top:2px}
+.t1 .e.tl .dot{width:12px;height:12px;border-radius:50%;background:var(--navy);margin-top:5px;position:relative;z-index:1}
+.t1 .e.tl .h{font-weight:800;font-size:15px;line-height:1.3}
+.t1 .e.tl .c{font-size:14px;color:#333}
+.t1 .e.tl p{font-size:11.5px;color:#333;margin-top:4px}
+.t1 .main .about{padding-inline:14px;font-size:12px;text-align:justify}
+.t1 .main ul.dl{column-count:2;column-gap:20px;font-size:12.5px;padding-inline-start:14px}
+
+/* ---- T2: beige & charcoal ---- */
+.t2{grid-template-columns:290px 12px 1fr;--beige:#b8a58c;--bt:#4a4f55;--bf:#b8a58c}
+.t2 .side{display:flex;flex-direction:column}
+.t2 .side .pt{height:344px;padding-top:19px;background:#fff}
+.t2 .side .pt .ph{height:323px;width:272px;background-color:#dedede}
+.t2 .side .dk{flex:1;background:#23282e;color:#fff;padding:34px 24px 34px 26px}
+.t2[dir=rtl] .side .dk{padding:34px 26px 34px 24px}
+.t2 .vl{background:linear-gradient(var(--beige) 0 56px,transparent 56px 220px,var(--beige) 220px)}
+.t2 .main{padding:72px 56px 40px 30px;position:relative}
+.t2[dir=rtl] .main{padding:72px 30px 40px 56px}
+.t2 .tag{position:absolute;top:0;inset-inline-end:0;width:70px;height:154px;background:var(--beige)}
+.t2 .foot{position:absolute;bottom:0;inset-inline-end:34px;width:38px;height:10px;background:var(--beige)}
+.t2 .name{margin-bottom:34px;line-height:1.1}
+.t2 .name .a{display:block;font-size:50px;font-weight:300;letter-spacing:.05em;text-transform:uppercase;color:#23282e}
+.t2 .name .b{display:block;font-size:50px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#1a1d21}
+.t2 .name .j{display:block;font-size:14px;letter-spacing:.25em;color:#6b6258;margin-top:10px;text-transform:uppercase;font-weight:500}
+.t2 .sh{font-weight:700;font-size:14.5px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:12px}
+.t2 .sh i{display:block;height:1px;background:var(--beige);position:relative;margin-top:7px}
+.t2 .sh i::after{content:"";position:absolute;inset-inline-start:0;top:-1px;width:32%;height:3px;background:var(--beige)}
+.t2 .side .sh{color:#fff;font-size:13.5px}
+.t2 .side .sh i{background:#6d6d6d}
+.t2 .side .sec{margin-bottom:26px}
+.t2 .ic{background:var(--beige);color:#23282e;width:24px;height:24px}
+.t2 .side .il{font-size:11.5px;margin-bottom:8px}
+.t2 .side .sk{grid-template-columns:1fr 1fr;margin-bottom:6px;font-size:11.5px}
+.t2 .side .bar{height:3px;background:#555}
+.t2 .e.row{display:grid;grid-template-columns:100px 1fr;gap:14px;margin-bottom:16px}
+.t2 .e.row .dt{font-size:11px;letter-spacing:.04em;padding-top:2px}
+.t2 .e.row .c1{font-size:15px;font-weight:500;line-height:1.35}
+.t2 .e.row .c2{font-size:12.5px}
+.t2 .e.row p{font-size:11.5px;color:#444;letter-spacing:.03em}
+.t2 .main .about{font-size:11.5px;letter-spacing:.04em;line-height:1.8}
+.t2 .main ul.dl{font-size:12px;letter-spacing:.03em}
+.t2 .side ul.dl{font-size:12px}
+.t2 .main .sec{margin-bottom:26px}
+
+/* ---- T3: black minimal ---- */
+.t3{grid-template-columns:33px 332px 1fr;--bt:transparent;--bf:#fff}
+.t3::after{content:"";position:absolute;inset:auto 0 0 0;height:70px;background:#000}
+.t3 .side{grid-column:2;background:#000;color:#fff;margin-bottom:105px;display:flex;flex-direction:column}
+.t3 .side .pt .ph{height:380px;background-color:#444}
+.t3 .side .in{padding:46px 26px 20px 28px}
+.t3[dir=rtl] .side .in{padding:46px 28px 20px 26px}
+.t3 .side .rule{width:140px;height:1px;background:#fff;margin:34px 0 0 28px}
+.t3[dir=rtl] .side .rule{margin:34px 28px 0 0}
+.t3 .side .sh{font-weight:700;font-size:14px;letter-spacing:.2em;text-transform:uppercase;margin-bottom:14px;margin-top:6px}
+.t3 .side .sec{margin-bottom:30px}
+.t3 .ic{color:#fff;background:transparent;width:22px;height:22px;justify-content:center}
+.t3 .side .il{font-size:12px;letter-spacing:.06em;margin-bottom:9px}
+.t3 .side .sk{grid-template-columns:1fr 1fr;font-size:12px;letter-spacing:.07em;margin-bottom:6px}
+.t3 .side .bar{height:7px;border:1px solid #fff;background:transparent}
+.t3 .side .bar b{background:#fff;border-inline-end:2px solid #000}
+.t3 .main{grid-column:3;margin-bottom:105px;padding:0 34px 0 38px;position:relative}
+.t3[dir=rtl] .main{padding:0 38px 0 34px}
+.t3 .hd{height:250px;border-bottom:1px solid #000;margin-inline:-38px -34px;padding-inline:62px 34px;display:flex;flex-direction:column;justify-content:center;position:relative}
+.t3[dir=rtl] .hd{margin-inline:-34px -38px;padding-inline:34px 62px}
+.t3 .hd::before{content:"";position:absolute;top:0;inset-inline-end:92px;width:1px;height:100px;background:#000}
+.t3 .hd::after{content:"";position:absolute;top:140px;inset-inline-end:0;width:41px;height:42px;background:#000}
+.t3 .hd .nm{font-size:25px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;line-height:1.3;margin-bottom:6px;max-width:86%}
+.t3 .hd .tt{font-size:19px;font-weight:300;letter-spacing:.2em;text-transform:uppercase}
+.t3 .mn{padding-top:28px}
+.t3 .main .sh{font-weight:700;font-size:14px;letter-spacing:.2em;text-transform:uppercase;margin-bottom:16px}
+.t3 .main .sec{margin-bottom:22px}
+.t3 .e .ph2{font-weight:700;letter-spacing:.1em;text-transform:uppercase;font-size:12px;line-height:1.5}
+.t3 .e .c2{font-size:12.5px;color:#10153a}
+.t3 .e p{font-size:11px;letter-spacing:.02em;color:#111}
+.t3 .main .about{font-size:12px;letter-spacing:.05em;line-height:1.8}
+.t3 .main ul.dl{font-size:12.5px;letter-spacing:.1em;line-height:1.9}
+.t3 .side ul.dl{font-size:12px;letter-spacing:.06em}
+
+/* ---- T4: lilac ---- */
+.t4{grid-template-columns:322px 19px 1fr;--lil:#ebdcf5;--lil2:#f4e9fa;--pur:#8f6a9f;--bt:#dcbfee;--bf:#a78bb5;color:#444}
+.t4 .side{background:var(--lil);padding:46px 22px 36px 28px;color:#4b4452}
+.t4[dir=rtl] .side{padding:46px 28px 36px 22px}
+.t4 .gap{background:var(--lil2)}
+.t4 .side .pw{display:grid;place-items:center;margin-bottom:22px}
+.t4 .side .ph{width:210px;height:284px;border:8px solid var(--pur);background-color:#e8e0ee}
+.t4 .side .sh{text-align:center;font-size:21px;font-weight:500;text-transform:uppercase;letter-spacing:.07em;margin-bottom:12px;color:#4b4452;line-height:1.3}
+.t4 .side .sec{margin-bottom:28px}
+.t4 .ic{background:transparent;color:#9a8aa6;width:22px;height:22px}
+.t4 .side .il{font-size:12px;margin-bottom:7px}
+.t4 .side .sk{grid-template-columns:1fr 1fr;font-size:12px;font-weight:700;margin-bottom:8px}
+.t4 .side .bar{height:11px;border-radius:0}
+.t4 .side ul.dl{font-size:12px;line-height:1.7}
+.t4 .main{padding:46px 40px 36px 0}
+.t4[dir=rtl] .main{padding:46px 0 36px 40px}
+.t4 .hd{text-align:center;margin-bottom:26px;padding-inline-start:26px}
+.t4 .hd .nm{font-size:37px;font-weight:500;text-transform:uppercase;line-height:1.2;color:#111}
+.t4 .hd .tt{font-size:20px;text-transform:uppercase;color:#555;font-weight:400}
+.t4 .main .sh{display:inline-block;background:var(--lil2);font-size:21px;font-weight:500;text-transform:uppercase;letter-spacing:.04em;padding:4px 44px 4px 28px;margin-bottom:12px;color:#4b4452}
+.t4[dir=rtl] .main .sh{padding:4px 28px 4px 44px}
+.t4 .main .in2{padding-inline-start:46px}
+.t4 .main .sec{margin-bottom:22px}
+.t4 .e .dt{font-size:11px;color:#555}
+.t4 .e .ph2{font-weight:700;font-size:14px;color:#333}
+.t4 .e .c2{font-size:13px;color:#555}
+.t4 .e p{font-size:11.5px;margin-inline-start:24px;margin-top:4px;text-align:justify;color:#444}
+.t4 .main .about{font-size:12.5px;text-align:justify;line-height:1.75}
+.t4 .main ul.dl{font-size:12.5px;line-height:1.7}
+
+/* ---- T5: ATS classic ---- */
+.t5{grid-template-columns:200px 1fr;--navy:#1f2a44;--gold:#b08d57;font-family:'Lato','Cairo',sans-serif;font-size:11px;color:#1a1a1a}
+.t5[dir=rtl]{font-family:'Cairo',sans-serif}
+.t5 .side{background:var(--navy);color:#fff;align-self:start;padding:34px 16px 24px 20px;min-height:820px}
+.t5[dir=rtl] .side{padding:34px 20px 24px 16px}
+.t5 .side .ph{width:130px;height:156px;margin-bottom:22px}
+.t5 .side .sh{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;border-bottom:1px solid var(--gold);padding-bottom:3px;margin-bottom:8px}
+.t5 .side .sec{margin-bottom:18px}
+.t5 .side .il{font-size:10px;margin-bottom:4px;gap:6px}
+.t5 .side .ic{width:14px;height:14px;background:transparent;color:var(--gold)}
+.t5 .side .ic svg{width:11px;height:11px}
+.t5 .side .e{margin-bottom:7px;font-size:9.8px;line-height:1.45}
+.t5 .side .e .ph2{font-weight:400}
+.t5 .side ul.dl li{font-size:9.8px;margin-bottom:3px;padding-inline-start:10px;position:relative}
+.t5 .side ul.dl li::before{content:"·";position:absolute;inset-inline-start:0;color:var(--gold);font-weight:900}
+.t5 .side .sk{display:block;margin-bottom:3px;font-size:9.8px}
+.t5 .main{padding:40px 34px 34px 30px}
+.t5[dir=rtl] .main{padding:40px 30px 34px 34px}
+.t5 .hd .nm{font-size:25px;font-weight:900;text-transform:uppercase;color:var(--navy);line-height:1.2}
+.t5 .hd .tt{font-family:Georgia,'Times New Roman',serif;color:var(--gold);font-size:14px;margin-bottom:14px}
+.t5 .main .sh{font-size:13.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;border-bottom:2px solid #333;padding-bottom:2px;margin-bottom:8px}
+.t5 .main .sec{margin-bottom:16px}
+.t5 .main .about{font-size:11.8px;line-height:1.55}
+.t5 .e .top{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+.t5 .e .top b{font-size:12.3px}
+.t5 .e .top em{color:var(--gold);font-weight:700;font-style:normal;font-family:Georgia,serif}
+.t5 .e .top i{font-style:italic;color:#555;font-size:9.8px;white-space:nowrap}
+.t5 .e ul.bl{font-size:11.4px;margin-top:2px}
+.t5 .e ul.bl li{margin-bottom:1px}
+.t5 .main ul.dl li{font-size:10.5px}
+
+
+/* ---- T6: classic single column ---- */
+.t6{grid-template-columns:1fr;--navy:#1a2b4a;padding:46px 54px 40px;font-family:'Poppins','Cairo',sans-serif;font-size:12px;color:#1a1a1a;align-content:start}
+.t6[dir=ltr]{font-family:'Lato','Poppins','Cairo',sans-serif}
+.t6[dir=rtl]{font-family:'Cairo',sans-serif}
+.t6 .hd{display:flex;gap:18px;align-items:center;margin-bottom:22px;padding-bottom:14px;border-bottom:3px solid var(--navy)}
+.t6 .hd .ph{width:84px;height:104px;flex:none}
+.t6 .hh{flex:1;min-width:0}
+.t6 .nm{font-size:28px;font-weight:800;color:var(--navy);line-height:1.2;text-transform:uppercase;overflow-wrap:anywhere}
+.t6 .tt{font-size:15px;color:#555;margin-top:2px}
+.t6 .ct{font-size:11px;color:#333;margin-top:8px;display:flex;flex-wrap:wrap;gap:2px 14px}
+.t6 .ct span{unicode-bidi:plaintext}
+.t6 .sec{margin-bottom:15px}
+.t6 .sh{font-size:13.5px;font-weight:800;color:var(--navy);text-transform:uppercase;letter-spacing:.06em;border-bottom:1.5px solid var(--navy);padding-bottom:3px;margin-bottom:8px}
+.t6 .about{font-size:12px;line-height:1.65}
+.t6 .e .top{display:flex;justify-content:space-between;gap:12px;align-items:baseline}
+.t6 .e .top b{font-size:13px}
+.t6 .e .top em{font-style:normal;font-weight:700;color:#444}
+.t6 .e .top i{font-style:italic;color:#555;font-size:11px;white-space:nowrap}
+.t6 .e .ph2{font-weight:700;font-size:13px}
+.t6 .e ul.bl{font-size:11.8px;margin-top:2px}
+.t6 .s-skills .sbd,.t6 .s-langs .sbd{display:flex;flex-wrap:wrap;gap:3px 22px}
+.t6 .sk{display:block;font-size:12px}
+.t6 ul.dl{columns:2;column-gap:28px;font-size:12px}
+/* certificate pages */
+.certpg{width:794px;height:1123px;background:#fff;padding:56px;display:flex;flex-direction:column;gap:22px;position:relative;font-family:'Cairo','Poppins',sans-serif;color:#222}
+.certpg h3{font-size:22px;font-weight:700;border-bottom:2px solid #222;padding-bottom:6px;margin:0}
+.certpg .cg{flex:1;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:20px}
+.certpg .cg div{border:1px solid #ccc;background:#fafafa center/contain no-repeat}
+</style>
+
+<div class="app" dir="rtl" lang="ar">
+  <header class="top">
+    <div class="brand"><div class="mk">RC</div><div><h1>ResumeCraft Studio</h1><p>صمّم سيرة ذاتية بخمس قوالب، وحمّلها PDF أو Word</p></div></div>
+    <div class="langbox"><small>لغة السيرة</small>
+      <div class="seg" role="group" aria-label="لغة السيرة الذاتية">
+        <button type="button" id="lang-ar" aria-pressed="true">عربي</button>
+        <button type="button" id="lang-en" aria-pressed="false">English</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="tpls" id="tpls" role="group" aria-label="القوالب"></div>
+
+  <div class="work" id="work" data-tab="form">
+    <div class="formpane" id="formpane">
+      <div class="ai-box">
+        <h2>ترجمة وصياغة بالذكاء الاصطناعي</h2>
+        <p>اكتب بياناتك زي ما تحب بأي لغة، وبضغطة واحدة تتصاغ وتترجم للغة السيرة المختارة بأسلوب طبيعي ومناسب لأنظمة ATS. مش بيخترع معلومات.</p>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <button type="button" class="btn pri" id="ai-go">صياغة وترجمة للغة الحالية</button>
+          <button type="button" class="btn" id="ai-undo" hidden>تراجع</button>
+        </div>
+        <div class="status" id="ai-status" style="margin:8px 0 0"></div>
+      </div>
+      <div id="sample-note" class="sample-note" hidden><span>الصفحة فيها بيانات تجريبية لتشوف شكل القوالب.</span><button type="button" class="btn sm" id="clear-all">امسح وابدأ ببياناتك</button></div>
+      <div class="card" id="import-card">
+        <h2>إضافة بيانات بسرعة <small>الصق نص السيرة أو اختر ملفًا</small></h2>
+        <label class="f"><span>الصق بيانات غير مرتبة هنا</span><textarea id="bulk-text" rows="5" placeholder="مثال: الاسم، الهاتف، البريد، الخبرات والتعليم والمهارات..."></textarea></label>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;align-items:center">
+          <button type="button" class="btn pri" id="parse-text">استخراج البيانات</button>
+          <label class="btn" for="resume-file">استيراد ملف نصي أو PDF</label>
+          <input id="resume-file" type="file" accept=".txt,.pdf,text/plain,application/pdf" hidden>
+        </div>
+        <p class="hint">يتم الاستخراج محليًا على جهازك. ملفات PDF النصية مدعومة؛ ملفات الصور/المسح الضوئي قد تحتاج OCR. راجع البيانات بعد الاستيراد.</p>
+        <div class="status" id="import-status"></div>
+      </div>
+      <div class="card" id="color-card">
+        <h2>ألوان القالب</h2>
+        <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+          <label class="f"><span>اللون الأساسي</span><input type="color" id="cv-color" value="#1c2539" style="width:64px;height:42px;padding:3px"></label>
+          <button type="button" class="btn sm" id="reset-color">إرجاع لون القالب</button>
+        </div>
+      </div>
+      <div id="form"></div>
+      <div class="card" id="saved-card">
+        <h2>سيرك المحفوظة <small>على هذا الجهاز فقط</small></h2>
+        <div class="grid2" style="align-items:end">
+          <label class="f"><span>اسم السيرة</span><input id="save-name" placeholder="مثال: سيرة محمد - محاسب"></label>
+          <button type="button" class="btn" id="save-btn">حفظ</button>
+        </div>
+        <div class="saved" id="saved-list"></div>
+      </div>
+    </div>
+
+    <div class="prev" id="prevpane">
+      <div class="actions">
+        <button type="button" class="btn pri" id="dl-pdf">تحميل PDF</button>
+        <button type="button" class="btn pri" id="dl-docx">تحميل Word</button>
+      </div>
+      <div class="wa-row">
+        <label class="f"><span>رقم واتساب للمشاركة</span><input id="wa-num" inputmode="tel" dir="ltr" placeholder="01XXXXXXXXX"></label>
+        <a class="btn wa" id="wa-link" href="#" target="_blank" rel="noopener">فتح واتساب</a>
+      </div>
+      <p class="hint" style="margin:-4px 0 8px">حمّل الملفين الأول، وبعدها ارفقهم في محادثة واتساب. المتصفح مش بيسمح بإرسال الملفات تلقائياً.</p>
+      <div class="status" id="status" role="status"></div>
+      <div class="stage" id="stage"><div class="scaler" id="scaler"><div id="pages"></div></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="bottom-tabs" role="tablist" dir="rtl">
+  <button type="button" role="tab" id="tab-form" aria-selected="true">البيانات</button>
+  <button type="button" role="tab" id="tab-prev" aria-selected="false">المعاينة والتحميل</button>
+</div>
+<div class="imgov" id="imgov" dir="rtl" hidden><div class="bx"><div class="note">التحميل المباشر مش متاح في العرض ده. اضغط مطولاً على كل صفحة واختار "حفظ الصورة" أو "مشاركة"، وتقدر تبعتها على واتساب. لملف Word افتح الرابط من المتصفح.</div><div id="imgs" style="display:flex;flex-direction:column;gap:12px"></div><button type="button" class="btn pri" id="imgov-close">رجوع</button></div></div>
+<div class="toast" id="toast" dir="rtl" hidden></div>
+
+<script>
+(function(){
+'use strict';
+/* ---------- helpers ---------- */
+const $=s=>document.querySelector(s);
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const lines=t=>String(t||'').split('\n').map(x=>x.trim()).filter(Boolean);
+const lsGet=k=>{try{return localStorage.getItem(k)}catch(e){return null}};
+const lsSet=(k,v)=>{try{localStorage.setItem(k,v);return true}catch(e){return false}};
+const clone=o=>JSON.parse(JSON.stringify(o));
+
+/* ---------- labels ---------- */
+const L={
+ ar:{info:'المعلومات الشخصية',about:'نبذة عني',exp:'الخبرات العملية',edu:'التعليم',skills:'المهارات',langs:'اللغات',courses:'الدورات والتدريب',qualities:'الصفات الشخصية',hobbies:'الهوايات',awards:'الجوائز والإنجازات',certs:'الشهادات'},
+ en:{info:'Personal Information',about:'About Me',exp:'Work Experience',edu:'Education',skills:'Skills',langs:'Languages',courses:'Courses & Training',qualities:'Personal Qualities',hobbies:'Hobbies',awards:'Awards',certs:'Certificates'}
+};
+const TT={
+ t1:{ar:{info:'المعلومات'},en:{info:'Information',exp:'Experience',qualities:'Qualities'}},
+ t2:{en:{exp:'Work Experience'}},
+ t3:{ar:{info:'',exp:'الخبرات'},en:{info:'',exp:'Experiences'}},
+ t4:{ar:{info:'التواصل',awards:'أنشطة إضافية'},en:{info:'Contact',exp:'Experience',awards:'Additional Activity'}},
+ t5:{en:{about:'Profile',exp:'Professional Experience',courses:'Courses & Training',skills:'Technical Skills',qualities:'Core Strengths',awards:'Award',info:'Contact'},ar:{about:'الملخص المهني',skills:'المهارات الفنية',qualities:'نقاط القوة',info:'التواصل'}}
+};
+const title=(tpl,lang,k)=>{const o=TT[tpl]&&TT[tpl][lang];return (o&&k in o)?o[k]:L[lang][k]};
+
+/* ---------- templates meta ---------- */
+const TPL={
+ t1:{name:'سداسي كحلي',th:'a',side:['info','skills','langs','hobbies'],main:['about','exp','edu','courses','qualities','awards'],
+     st:{entry:'tl',expHead:'role',eduHead:'degree',skills:'box',langs:'circle'},word:{side:'1C2539',fg:'FFFFFF',acc:'1C2539',sideW:4900}},
+ t2:{name:'بيج وفحمي',th:'b',side:['info','skills','langs','hobbies'],main:['about','edu','exp','courses','qualities','awards'],
+     st:{entry:'row',expHead:'company',eduHead:'school',skills:'bar',langs:'bar'},word:{side:'23282E',fg:'FFFFFF',acc:'B8A58C',sideW:4300}},
+ t3:{name:'أبيض وأسود',th:'c',side:['info','langs','skills','hobbies'],main:['about','edu','exp','courses','qualities','awards'],
+     st:{entry:'paren',expHead:'company',eduHead:'school',skills:'bar',langs:'bar'},word:{side:'000000',fg:'FFFFFF',acc:'000000',sideW:4900}},
+ t4:{name:'بنفسجي فاتح',th:'d',side:['info','langs','skills','qualities','hobbies'],main:['about','edu','exp','courses','awards'],
+     st:{entry:'stack',expHead:'company',eduHead:'school',skills:'bar',langs:'bar'},word:{side:'EBDCF5',fg:'4B4452',acc:'8F6A9F',sideW:4800}},
+ t5:{name:'ATS شريط كحلي',th:'e',side:['info','edu','courses','skills','langs','qualities','hobbies'],main:['about','exp','awards'],
+     st:{entry:'bul',expHead:'role',eduHead:'degree',skills:'list',langs:'list'},word:{side:'1F2A44',fg:'FFFFFF',acc:'B08D57',sideW:3000}},
+ t6:{name:'كلاسيك بسيط',th:'f',side:[],main:['about','exp','edu','skills','langs','courses','qualities','awards','hobbies'],
+     st:{entry:'bul',expHead:'role',eduHead:'degree',skills:'list',langs:'list'},word:{side:null,fg:'222222',acc:'1A2B4A',sideW:0}}
+};
+
+/* ---------- sample data ---------- */
+const SAMPLE={
+ ar:{name:'أحمد حسن إبراهيم',title:'محاسب تكاليف',dob:'12/03/1994',phone:'01012345678',email:'ahmed.hassan@example.com',address:'القاهرة، مصر',linkedin:'linkedin.com/in/ahmed-hassan',
+  about:'محاسب تكاليف بخبرة 5 سنوات في المحاسبة التعاقدية وتحليل الانحرافات وإعداد التقارير المالية. أبحث عن فريق يقدّر الدقة ويتيح لي تطوير مهاراتي.',
+  exp:[{role:'محاسب تكاليف',company:'شركة النيل للمقاولات',from:'05/2024',to:'الآن',desc:'إعداد تقارير التكاليف وتحليل الانحرافات عن التقديرات\nمراجعة بنود المشروعات ورفع توصيات للإدارة'},
+       {role:'محاسب',company:'مجموعة الدلتا الفنية',from:'03/2021',to:'04/2024',desc:'تسجيل القيود اليومية وإقفال الحسابات الشهرية\nمطابقة الحسابات البنكية وحسابات الموردين'}],
+  edu:[{degree:'بكالوريوس تجارة - قسم محاسبة',school:'جامعة القاهرة',from:'2015',to:'2019',desc:''}],
+  skills:[{name:'Excel',level:90},{name:'تحليل التكاليف',level:85},{name:'نظام Odoo',level:70},{name:'ضريبة القيمة المضافة',level:75}],
+  langs:[{name:'العربية',level:100},{name:'الإنجليزية',level:75}],
+  courses:'دبلومة المعايير الدولية IFRS\nورشة نظام Odoo المحاسبي',
+  qualities:'العمل ضمن فريق\nالتحليل وحل المشكلات\nالتخطيط الاستباقي',
+  hobbies:'القراءة\nالسفر',awards:'شهادة تقدير من إدارة المالية - 2023',photo:'',certs:[]},
+ en:{name:'Ahmed Hassan Ibrahim',title:'Cost Accountant',dob:'12/03/1994',phone:'+20 101 234 5678',email:'ahmed.hassan@example.com',address:'Cairo, Egypt',linkedin:'linkedin.com/in/ahmed-hassan',
+  about:'Cost accountant with 5 years of experience in contracting accounting, variance analysis and financial reporting. Looking to join a team that values accuracy and supports professional growth.',
+  exp:[{role:'Cost Accountant',company:'Nile Contracting Company',from:'05/2024',to:'Present',desc:'Prepared cost reports and analyzed variances against estimates\nReviewed project line items and advised management'},
+       {role:'Accountant',company:'Delta Technical Group',from:'03/2021',to:'04/2024',desc:'Posted daily journal entries and closed monthly accounts\nReconciled bank and supplier accounts'}],
+  edu:[{degree:"Bachelor's Degree, Accounting",school:'Cairo University',from:'2015',to:'2019',desc:''}],
+  skills:[{name:'Excel',level:90},{name:'Cost analysis',level:85},{name:'Odoo ERP',level:70},{name:'VAT filing',level:75}],
+  langs:[{name:'Arabic',level:100},{name:'English',level:75}],
+  courses:'IFRS Diploma\nOdoo accounting workshop',qualities:'Team collaboration\nProblem solving\nProactive planning',
+  hobbies:'Reading\nTravel',awards:'Certificate of Appreciation, Finance Department, 2023',photo:'',certs:[]}
+};
+const BLANK=()=>({name:'',title:'',dob:'',phone:'',email:'',address:'',linkedin:'',about:'',exp:[{role:'',company:'',from:'',to:'',desc:''}],edu:[{degree:'',school:'',from:'',to:'',desc:''}],
+  skills:[{name:'',level:80}],langs:[{name:'',level:80}],courses:'',qualities:'',hobbies:'',awards:'',photo:'',certs:[]});
+
+/* ---------- state ---------- */
+let S={lang:'ar',tpl:'t1',sample:true,d:clone(SAMPLE.ar),incCerts:true};
+(function(){const raw=lsGet('rc:draft');if(!raw)return;try{const o=JSON.parse(raw);if(o&&o.d&&o.tpl&&TPL[o.tpl]){S=Object.assign(S,o)}}catch(e){}})();
+let saveT=0;
+const saveDraft=()=>{clearTimeout(saveT);saveT=setTimeout(()=>{lsSet('rc:draft',JSON.stringify(S))},500)};
+
+const get=(p)=>p.split('.').reduce((o,k)=>o==null?o:o[k],S.d);
+const set=(p,v)=>{const ks=p.split('.');const last=ks.pop();const o=ks.reduce((a,k)=>a[k],S.d);o[last]=v};
+
+/* ---------- icons ---------- */
+const IC={
+ dob:'<rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>',
+ phone:'<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>',
+ email:'<path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/><path d="M22 6l-10 7L2 6"/>',
+ address:'<path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>',
+ linkedin:'<path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>'
+};
+const icon=k=>`<span class="ic"><svg viewBox="0 0 24 24">${IC[k]}</svg></span>`;
+const USER='<svg viewBox="0 0 24 24"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0 2c-4.4 0-8 2.2-8 5v2h16v-2c0-2.8-3.6-5-8-5z"/></svg>';
+
+/* ---------- CV rendering ---------- */
+const range=it=>[it.from,it.to].filter(Boolean).join(' - ');
+const photoDiv=(d,cls='')=>d.photo?`<div class="ph ${cls}" style="background-image:url('${d.photo}')"></div>`:`<div class="ph empty ${cls}">${USER}</div>`;
+const lvl=n=>Math.max(0,Math.min(100,Number(n)||0));
+const bar=n=>`<div class="bar"><b style="width:${lvl(n)}%"></b></div>`;
+
+function infoBody(d,st,tpl){
+  const items=[['dob',d.dob],['phone',d.phone],['email',d.email],['address',d.address],['linkedin',d.linkedin]].filter(x=>x[1]);
+  return items.map(([k,v])=>`<div class="il">${icon(k)}<span>${esc(v)}</span></div>`).join('');
+}
+function descHTML(t,bul){const ls=lines(t);if(!ls.length)return'';return bul?`<ul class="bl">${ls.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`:`<p>${ls.map(esc).join('<br>')}</p>`}
+
+function entry(kind,it,st){
+  const head=kind==='exp'?st.expHead:st.eduHead;
+  let h,s;
+  if(kind==='exp'){h=head==='role'?it.role:it.company;s=head==='role'?it.company:it.role}
+  else{h=head==='degree'?it.degree:it.school;s=head==='degree'?it.school:it.degree}
+  if(!(h||s||it.desc))return'';
+  const r=range(it);
+  switch(st.entry){
+   case 'tl':return `<div class="e tl"><div class="dt">${esc(it.from)}${it.to?'<br>'+esc(it.to):''}</div><div class="dot"></div><div><div class="h">${esc(h)}</div><div class="c">${esc(s)}</div>${descHTML(it.desc,false)}</div></div>`;
+   case 'row':return `<div class="e row"><div class="dt">${esc(r)}</div><div><div class="c1">${esc(h)}</div><div class="c2">${esc(s)}</div>${descHTML(it.desc,false)}</div></div>`;
+   case 'paren':return `<div class="e"><div class="ph2">${r?'('+esc(r)+') ':''}${esc(h)}</div><div class="c2">${esc(s)}</div>${descHTML(it.desc,false)}</div>`;
+   case 'stack':return `<div class="e"><div class="dt">${esc(r)}</div><div class="ph2">${esc(h)}</div><div class="c2">${esc(s)}</div>${descHTML(it.desc,false)}</div>`;
+   default:
+    if(kind==='exp')return `<div class="e"><div class="top"><span><b>${esc(it.role)}</b>${it.role&&it.company?' — ':''}<em>${esc(it.company)}</em></span><i>${esc(r)}</i></div>${descHTML(it.desc,true)}</div>`;
+    return `<div class="e"><div class="ph2">${esc(it.degree)}</div><div>${esc(it.school)}${r?' — '+esc(r):''}</div>${descHTML(it.desc,false)}</div>`;
+  }
+}
+function skillsBody(items,st){
+  return items.filter(x=>x.name).map(x=>{
+    if(st.skills==='list')return `<div class="sk">· ${esc(x.name)}</div>`;
+    if(st.skills==='box')return `<div class="sk"><div class="n">${esc(x.name)}</div>${bar(x.level)}</div>`;
+    return `<div class="sk"><span>${esc(x.name)}</span>${bar(x.level)}</div>`;
+  }).join('');
+}
+function langsBody(items,st){
+  const its=items.filter(x=>x.name);
+  if(st.langs==='circle')return `<div class="lcs">${its.map(x=>{const p=lvl(x.level);return `<div class="lc"><svg viewBox="0 0 44 44" width="58" height="58"><circle cx="22" cy="22" r="19" fill="none" stroke="#ffffff" stroke-opacity=".28" stroke-width="3"/><circle cx="22" cy="22" r="19" fill="none" stroke="#ffffff" stroke-width="3" stroke-dasharray="${(p*1.1938).toFixed(1)} 200" transform="rotate(-90 22 22)"/><text x="22" y="25.5" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff">${p}%</text></svg><div>${esc(x.name)}</div></div>`}).join('')}</div>`;
+  if(st.langs==='list')return its.map(x=>`<div class="sk">· ${esc(x.name)}</div>`).join('');
+  return its.map(x=>`<div class="sk"><span>${esc(x.name)}</span>${bar(x.level)}</div>`).join('');
+}
+function listBody(t){const ls=lines(t);return ls.length?`<ul class="dl">${ls.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`:''}
+
+function secHTML(kind,tpl,lang,d){
+  const st=TPL[tpl].st;let body='';
+  switch(kind){
+   case 'info':body=infoBody(d,st,tpl);break;
+   case 'about':body=d.about?`<div class="about">${esc(d.about).replace(/\n/g,'<br>')}</div>`:'';break;
+   case 'exp':body=(d.exp||[]).map(it=>entry('exp',it,st)).join('');break;
+   case 'edu':body=(d.edu||[]).map(it=>entry('edu',it,st)).join('');break;
+   case 'skills':body=skillsBody(d.skills||[],st);break;
+   case 'langs':body=langsBody(d.langs||[],st);break;
+   default:body=listBody(d[kind]);
+  }
+  if(!body)return'';
+  const t=title(tpl,lang,kind);
+  const h=t?`<h3 class="sh"><span>${esc(t)}</span><i></i></h3>`:'';
+  const inner=(tpl==='t4'&&!h.includes('side'))?body:body;
+  return `<section class="sec s-${kind}">${h}<div class="sbd">${inner}</div></section>`;
+}
+
+function cvHTML(){
+  const {lang,tpl,d}=S;const dir=lang==='ar'?'rtl':'ltr';const T=TPL[tpl];
+  const sec=k=>secHTML(k,tpl,lang,d);
+  const side=T.side.map(sec).join(''), main=T.main.map(sec).join('');
+  const nm=esc(d.name||(lang==='ar'?'اسمك هنا':'Your Name')), tt=esc(d.title||'');
+  switch(tpl){
+   case 't1':{
+    const img=d.photo?`<image href="${d.photo}" x="26" y="26" width="180" height="216" preserveAspectRatio="xMidYMid slice" clip-path="url(#hx)"/>`:`<polygon points="116,26 206,79 206,189 116,242 26,189 26,79" fill="#3a455c"/><g fill="#a8b0bf" transform="translate(86 84) scale(1.25)"><circle cx="24" cy="22" r="14"/><path d="M0 84c0-24 11-36 24-36s24 12 24 36z"/></g>`;
+    const hexs=`<div class="hexs"><svg viewBox="0 0 232 268"><defs><clipPath id="hx"><polygon points="116,26 206,79 206,189 116,242 26,189 26,79"/></clipPath></defs><polygon points="116,0 232,67 232,201 116,268 0,201 0,67" fill="#ffffff"/><polygon points="116,12 222,73 222,195 116,256 10,195 10,73" fill="#1c2539"/>${img}</svg></div>`;
+    return `<div class="cv t1" dir="${dir}"><div class="side">${side}</div><div class="main">${main}</div><div class="cap"></div><div class="hdr"><div class="nm">${nm}</div><div class="tt"><span>${tt}</span><i></i></div></div>${hexs}</div>`}
+   case 't2':{
+    const w=(d.name||'').trim().split(/\s+/);const a=esc(w[0]||nm), b=esc(w.slice(1).join(' '));
+    return `<div class="cv t2" dir="${dir}"><div class="side"><div class="pt">${photoDiv(d)}</div><div class="dk">${side}</div></div><div class="vl"></div><div class="main"><div class="tag"></div><div class="name"><span class="a">${a}</span>${b?`<span class="b">${b}</span>`:''}${tt?`<span class="j">${tt}</span>`:''}</div>${main}<div class="foot"></div></div></div>`}
+   case 't3':
+    return `<div class="cv t3" dir="${dir}"><div></div><div class="side"><div class="pt">${photoDiv(d)}</div><div class="rule"></div><div class="in">${side}</div></div><div class="main"><div class="hd"><div class="nm">${nm}</div><div class="tt">${tt}</div></div><div class="mn">${main}</div></div></div>`;
+   case 't4':
+    return `<div class="cv t4" dir="${dir}"><div class="side"><div class="pw">${photoDiv(d)}</div>${side}</div><div class="gap"></div><div class="main"><div class="hd"><div class="nm">${nm}</div><div class="tt">${tt}</div></div><div class="in2">${main}</div></div></div>`;
+   case 't6':{
+    const ct=[d.phone,d.email,d.address,d.linkedin,d.dob].filter(Boolean).map(x=>`<span>${esc(x)}</span>`).join('');
+    return `<div class="cv t6" dir="${dir}"><div class="hd">${d.photo?photoDiv(d):''}<div class="hh"><div class="nm">${nm}</div><div class="tt">${tt}</div><div class="ct">${ct}</div></div></div>${main}</div>`}
+   default:
+    return `<div class="cv t5" dir="${dir}"><div class="side">${photoDiv(d)}${side}</div><div class="main"><div class="hd"><div class="nm">${nm}</div><div class="tt">${tt}</div></div>${main}</div></div>`;
+  }
+}
+function certPagesHTML(){
+  const c=S.d.certs||[];if(!S.incCerts||!c.length)return'';
+  const dir=S.lang==='ar'?'rtl':'ltr';let out='';
+  for(let i=0;i<c.length;i+=4){
+    const cells=c.slice(i,i+4).map(x=>`<div style="background-image:url('${x.src}')"></div>`).join('');
+    out+=`<div class="certpg" dir="${dir}"><h3>${esc(L[S.lang].certs)}</h3><div class="cg">${cells}</div></div>`;
+  }
+  return out;
+}
+
+/* ---------- preview ---------- */
+let rafId=0;
+function renderPreview(){
+  cancelAnimationFrame(rafId);
+  rafId=requestAnimationFrame(()=>{
+    const pages=$('#pages');pages.innerHTML=cvHTML()+certPagesHTML();
+    const cv=pages.querySelector('.cv');if(cv){const col=S.color||('#'+(TPL[S.tpl].word.acc||'1C2539').toLowerCase());cv.style.setProperty('--user-accent',col);const sideColor=TPL[S.tpl].word.side?'#'+TPL[S.tpl].word.side.toLowerCase():col;if(S.tpl==='t1')cv.style.setProperty('--navy',col);if(S.tpl==='t2')cv.style.setProperty('--beige',col);if(S.tpl==='t4')cv.style.setProperty('--pur',col);}
+    fit();updateWA();
+  });
+}
+function fit(){
+  const stage=$('#stage'),pages=$('#pages'),sc=$('#scaler');
+  const avail=Math.max(200,stage.clientWidth-24);const s=Math.min(1,avail/794);
+  pages.style.transform=`scale(${s})`;
+  sc.style.width=(794*s)+'px';sc.style.height=(pages.offsetHeight*s)+'px';
+}
+new ResizeObserver(()=>fit()).observe($('#stage'));
+window.addEventListener('resize',fit);
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit);
+
+/* ---------- WhatsApp ---------- */
+function waNumber(raw){
+  let n=String(raw||'').replace(/[^\d+]/g,'');
+  if(n.startsWith('+'))return n.slice(1);
+  if(n.startsWith('00'))return n.slice(2);
+  if(n.startsWith('0'))return '20'+n.slice(1);
+  return n;
+}
+function updateWA(){
+  const a=$('#wa-link');const num=waNumber($('#wa-num').value);
+  const name=S.d.name||'';
+  const msg=S.lang==='ar'?`مرفق السيرة الذاتية${name?' الخاصة بـ '+name:''}.`:`Please find attached the CV${name?' of '+name:''}.`;
+  a.href='https://wa.me/'+(num||'')+'?text='+encodeURIComponent(msg);
+}
+$('#wa-num').addEventListener('input',()=>{lsSet('rc:wa',$('#wa-num').value);updateWA()});
+
+/* ---------- form ---------- */
+const F=(label,path,o={})=>{
+  const t=o.type||'text';
+  const cls='f'+(o.full?' full':'');
+  if(t==='textarea')return `<label class="${cls}"><span>${label}</span><textarea data-k="${path}" rows="${o.rows||3}" placeholder="${esc(o.ph||'')}"></textarea></label>`;
+  if(t==='range')return `<label class="${cls}"><span>${label} <b data-out="${path}"></b></span><input data-k="${path}" type="range" min="0" max="100" step="5"></label>`;
+  return `<label class="${cls}"><span>${label}</span><input data-k="${path}" type="${t}" ${o.dir?`dir="${o.dir}"`:''} placeholder="${esc(o.ph||'')}"></label>`;
+};
+const listCard=(key,title,fn,addLabel)=>{
+  const arr=S.d[key]||[];
+  return `<div class="card" data-list="${key}"><h2>${title}</h2>${arr.map((_,i)=>`<div class="item${fn.row?' row':''}">${fn.html(i)}<div style="display:flex;justify-content:flex-end">${arr.length>1?`<button type="button" class="btn del sm" data-del="${key}" data-i="${i}">حذف</button>`:''}</div></div>`).join('')}<button type="button" class="btn add" data-add="${key}">+ ${addLabel}</button></div>`;
+};
+function buildForm(){
+  const d=S.d;
+  const html=[
+   `<div class="card"><h2>البيانات الأساسية</h2>
+     <div class="photo-row"><div class="photo-prev" id="photo-prev">${d.photo?'':'بدون صورة'}</div>
+       <div><label class="btn sm" for="photo-in">رفع صورة شخصية</label><input type="file" id="photo-in" accept="image/*" hidden>
+       <button type="button" class="btn del sm" id="photo-del" ${d.photo?'':'hidden'}>إزالة</button><p class="hint">الصورة تتصغّر تلقائياً وتفضل على جهازك.</p></div></div>
+     <div class="grid2" style="margin-top:12px">${F('الاسم الكامل','name',{full:1})}${F('المسمى الوظيفي','title',{full:1})}${F('تاريخ الميلاد','dob')}${F('رقم الهاتف','phone',{type:'tel',dir:'ltr'})}${F('البريد الإلكتروني','email',{type:'email',dir:'ltr'})}${F('العنوان / المدينة','address')}${F('رابط لينكدإن','linkedin',{full:1,dir:'ltr'})}</div></div>`,
+   `<div class="card"><h2>نبذة مختصرة</h2>${F('نبذة عنك وأهدافك','about',{type:'textarea',rows:4,full:1})}</div>`,
+   listCard('exp','الخبرات العملية',{html:i=>`<div class="grid2">${F('المسمى الوظيفي',`exp.${i}.role`)}${F('الشركة',`exp.${i}.company`)}${F('من',`exp.${i}.from`,{ph:'05/2021'})}${F('إلى',`exp.${i}.to`,{ph:'الآن'})}${F('المهام (سطر لكل نقطة)',`exp.${i}.desc`,{type:'textarea',rows:4,full:1})}</div>`},'إضافة خبرة'),
+   listCard('edu','التعليم',{html:i=>`<div class="grid2">${F('الدرجة / التخصص',`edu.${i}.degree`)}${F('الجامعة / المدرسة',`edu.${i}.school`)}${F('من',`edu.${i}.from`)}${F('إلى',`edu.${i}.to`)}</div>`},'إضافة مؤهل'),
+   listCard('skills','المهارات',{row:1,html:i=>`${F('المهارة',`skills.${i}.name`)}${F('المستوى',`skills.${i}.level`,{type:'range'})}`},'إضافة مهارة'),
+   listCard('langs','اللغات',{row:1,html:i=>`${F('اللغة',`langs.${i}.name`)}${F('المستوى',`langs.${i}.level`,{type:'range'})}`},'إضافة لغة'),
+   `<div class="card"><h2>أقسام إضافية <small>سطر لكل عنصر</small></h2><div class="grid2">${F('الدورات والشهادات','courses',{type:'textarea',full:1})}${F('الصفات الشخصية','qualities',{type:'textarea',full:1})}${F('الهوايات','hobbies',{type:'textarea',full:1})}${F('جوائز وإنجازات','awards',{type:'textarea',full:1})}</div></div>`,
+   `<div class="card"><h2>صور الشهادات <small>اختياري</small></h2><label class="btn sm" for="cert-in">رفع صور شهادات</label><input type="file" id="cert-in" accept="image/*" multiple hidden>
+     <label style="display:flex;gap:8px;align-items:center;margin-top:10px;font-size:13.5px"><input type="checkbox" id="cert-inc" ${S.incCerts?'checked':''}> إضافة صفحة الشهادات في الملف (4 صور في الصفحة)</label>
+     <div class="certs" id="certs"></div></div>`
+  ].join('');
+  $('#form').innerHTML=html;
+  syncForm();
+}
+function syncForm(){
+  document.querySelectorAll('#form [data-k]').forEach(el=>{const v=get(el.dataset.k);el.value=v==null?'':v;});
+  document.querySelectorAll('#form [data-out]').forEach(el=>{el.textContent=lvl(get(el.dataset.out))+'%'});
+  const pp=$('#photo-prev');if(pp){pp.style.backgroundImage=S.d.photo?`url('${S.d.photo}')`:'';pp.textContent=S.d.photo?'':'بدون صورة'}
+  const pd=$('#photo-del');if(pd)pd.hidden=!S.d.photo;
+  const c=$('#certs');if(c)c.innerHTML=(S.d.certs||[]).map((x,i)=>`<div class="cert-t" style="background-image:url('${x.src}')"><button type="button" data-delcert="${i}" aria-label="حذف">×</button></div>`).join('');
+  $('#sample-note').hidden=!S.sample;
+}
+$('#form').addEventListener('input',e=>{
+  const el=e.target;if(!el.dataset||!el.dataset.k)return;
+  set(el.dataset.k,el.type==='range'?Number(el.value):el.value);
+  if(el.type==='range'){const o=document.querySelector(`[data-out="${el.dataset.k}"]`);if(o)o.textContent=lvl(el.value)+'%'}
+  if(S.sample){S.sample=false;$('#sample-note').hidden=true}
+  if(el.dataset.k==='phone'&&!$('#wa-num').value){}
+  renderPreview();saveDraft();
+});
+$('#form').addEventListener('click',e=>{
+  const b=e.target.closest('button');if(!b)return;
+  if(b.dataset.add){const k=b.dataset.add;const tpl={exp:{role:'',company:'',from:'',to:'',desc:''},edu:{degree:'',school:'',from:'',to:'',desc:''},skills:{name:'',level:80},langs:{name:'',level:80}}[k];S.d[k].push(clone(tpl));S.sample=false;buildForm();renderPreview();saveDraft()}
+  else if(b.dataset.del){S.d[b.dataset.del].splice(Number(b.dataset.i),1);S.sample=false;buildForm();renderPreview();saveDraft()}
+  else if(b.dataset.delcert!==undefined){S.d.certs.splice(Number(b.dataset.delcert),1);syncForm();renderPreview();saveDraft()}
+  else if(b.id==='photo-del'){S.d.photo='';syncForm();renderPreview();saveDraft()}
+});
+$('#form').addEventListener('change',e=>{
+  if(e.target.id==='photo-in'&&e.target.files[0]){readImg(e.target.files[0],700,.86).then(r=>{S.d.photo=r.src;S.sample=false;syncForm();renderPreview();saveDraft()});e.target.value=''}
+  else if(e.target.id==='cert-in'&&e.target.files.length){
+    Promise.all([...e.target.files].map(f=>readImg(f,1100,.82))).then(rs=>{S.d.certs=(S.d.certs||[]).concat(rs);syncForm();renderPreview();saveDraft()});e.target.value='';
+  }else if(e.target.id==='cert-inc'){S.incCerts=e.target.checked;renderPreview();saveDraft()}
+});
+function readImg(file,max,q){
+  return new Promise((res,rej)=>{
+    const fr=new FileReader();
+    fr.onload=()=>{const im=new Image();im.onload=()=>{
+      const s=Math.min(1,max/Math.max(im.width,im.height));const c=document.createElement('canvas');c.width=Math.round(im.width*s);c.height=Math.round(im.height*s);
+      const x=c.getContext('2d');x.fillStyle='#fff';x.fillRect(0,0,c.width,c.height);x.drawImage(im,0,0,c.width,c.height);
+      res({src:c.toDataURL('image/jpeg',q),w:c.width,h:c.height});
+    };im.onerror=rej;im.src=fr.result};fr.onerror=rej;fr.readAsDataURL(file);
+  });
+}
+
+/* ---------- bulk import and local resume parsing ---------- */
+function detectBulk(text){
+  const d=BLANK(), t=String(text||'').replace(/\r/g,'');
+  const pick=(re)=>{const m=t.match(re);return m?m[1].trim():''};
+  d.email=pick(/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i);
+  d.phone=pick(/(?:\+?\d[\d\s().-]{7,}\d)/);
+  d.linkedin=pick(/(?:https?:\/\/)?(?:www\.)?linkedin\.com\/[^\s,;]+/i);
+  const lines=t.split('\n').map(x=>x.trim()).filter(Boolean);
+  const labeled=(labels)=>{for(const line of lines){const m=line.match(new RegExp('^(?:'+labels+')\\s*[:：-]\\s*(.+)$','i'));if(m)return m[1].trim()}return ''};
+  d.name=labeled('الاسم(?: الكامل)?|name|full name') || lines.find(x=>!/[.@\d]/.test(x)&&x.length<55)||'';
+  d.title=labeled('المسمى الوظيفي|الوظيفة|job title|title');
+  d.address=labeled('العنوان|المدينة|الموقع|address|location');
+  d.about=labeled('نبذة|ملخص|الملخص المهني|summary|profile');
+  const section=(labels,next)=>{let on=false,out=[];for(const line of lines){if(new RegExp('^(?:'+labels+')\\s*:?$','i').test(line)){on=true;continue}if(on&&next.test(line))break;if(on)out.push(line.replace(/^[-•*]\s*/,''))}return out};
+  const exp=section('الخبرات العملية|الخبرة|experience|work experience',/^(?:التعليم|education|المهارات|skills|الدورات|courses)\s*:?$/i);
+  if(exp.length)d.exp=[{role:'',company:'',from:'',to:'',desc:exp.join('\n')}];
+  const edu=section('التعليم|education',/^(?:المهارات|skills|الخبرات|experience|الدورات|courses)\s*:?$/i);
+  if(edu.length)d.edu=[{degree:edu[0]||'',school:edu.slice(1).join(' — '),from:'',to:'',desc:''}];
+  const skills=section('المهارات|skills',/^(?:اللغات|languages|الدورات|courses|الخبرات|experience)\s*:?$/i);
+  if(skills.length)d.skills=skills.flatMap(x=>x.split(/[,،|]/)).map(name=>({name:name.trim(),level:80})).filter(x=>x.name);
+  const langs=section('اللغات|languages',/^(?:الدورات|courses|الخبرات|experience|المهارات|skills)\s*:?$/i);
+  if(langs.length)d.langs=langs.flatMap(x=>x.split(/[,،|]/)).map(name=>({name:name.trim(),level:80})).filter(x=>x.name);
+  d.courses=section('الدورات|الدورات التدريبية|courses',/^(?:الخبرات|experience|المهارات|skills)\s*:?$/i).join('\n');
+  return d;
+}
+function mergeImported(base,imp){for(const k of ['name','title','phone','email','address','linkedin','about','courses'])if(imp[k])base[k]=imp[k];for(const k of ['exp','edu','skills','langs'])if(imp[k]&&imp[k].length&&imp[k].some(x=>Object.values(x).some(Boolean)))base[k]=imp[k];}
+function importText(text){const imp=detectBulk(text);const n=Object.values(imp).filter(v=>typeof v==='string'?!!v:Array.isArray(v)&&v.some(x=>Object.values(x).some(Boolean))).length;if(!n)return 0;if(S.sample)S.d=BLANK();mergeImported(S.d,imp);S.sample=false;buildForm();renderPreview();saveDraft();return n}
+$('#parse-text').onclick=()=>{const n=importText($('#bulk-text').value);const el=$('#import-status');el.textContent=n?`تم استخراج بيانات مبدئية (${n} حقول/أقسام). راجعها وعدّلها.`:'لم أتعرف على بيانات واضحة؛ جرّب لصق النص كاملًا مع عناوين مثل الاسم والهاتف والتعليم.';el.className='status '+(n?'ok':'err')};
+$('#resume-file').addEventListener('change',async e=>{const f=e.target.files[0];if(!f)return;const st=$('#import-status');try{let txt='';if(f.type==='text/plain'||/\.txt$/i.test(f.name))txt=await f.text();else if(f.type==='application/pdf'||/\.pdf$/i.test(f.name)){st.textContent='جاري قراءة PDF…';if(!window.pdfjsLib){await loadScript('pdf.min.js');window.pdfjsLib.GlobalWorkerOptions.workerSrc='pdf.worker.min.js'}const pdf=await pdfjsLib.getDocument({data:new Uint8Array(await f.arrayBuffer())}).promise;for(let i=1;i<=pdf.numPages;i++){const page=await pdf.getPage(i);const c=await page.getTextContent();txt+=c.items.map(x=>x.str).join(' ')+'\n'}}else throw Error('النوع غير مدعوم');$('#bulk-text').value=txt;const n=importText(txt);st.textContent=n?`تمت قراءة الملف واستخراج بيانات مبدئية (${n}). راجعها في النموذج.`:'تمت قراءة الملف لكن لم تظهر بيانات قابلة للاستخراج؛ قد يكون ممسوحًا ضوئيًا.';st.className='status '+(n?'ok':'err')}catch(err){st.textContent='تعذرت قراءة الملف. جرّب PDF نصيًا أو انسخ النص والصقه.';st.className='status err'}finally{e.target.value=''}});
+$('#cv-color').addEventListener('input',e=>{S.color=e.target.value;renderPreview();saveDraft()});
+$('#reset-color').onclick=()=>{S.color='';$('#cv-color').value=TPL[S.tpl].word.acc?'#'+TPL[S.tpl].word.acc.toLowerCase():'#1c2539';renderPreview();saveDraft()};
+
+/* ---------- template picker + language ---------- */
+function buildTpls(){
+  $('#tpls').innerHTML=Object.entries(TPL).map(([k,t])=>`<button type="button" class="tpl" data-t="${k}" aria-pressed="${S.tpl===k}"><div class="th ${t.th}"><i></i><i></i><i></i></div><span>${t.name}</span></button>`).join('');
+}
+$('#tpls').addEventListener('click',e=>{const b=e.target.closest('[data-t]');if(!b)return;S.tpl=b.dataset.t;buildTpls();renderPreview();saveDraft()});
+function setLang(l){
+  S.lang=l;
+  if(S.sample){S.d=clone(SAMPLE[l]);buildForm()}
+  $('#lang-ar').setAttribute('aria-pressed',l==='ar');$('#lang-en').setAttribute('aria-pressed',l==='en');
+  renderPreview();saveDraft();
+}
+$('#lang-ar').onclick=()=>setLang('ar');$('#lang-en').onclick=()=>setLang('en');
+
+$('#clear-all').onclick=()=>{S.d=BLANK();S.sample=false;buildForm();renderPreview();saveDraft()};
+
+/* ---------- tabs (phone) ---------- */
+function tab(t){$('#work').dataset.tab=t;$('#tab-form').setAttribute('aria-selected',t==='form');$('#tab-prev').setAttribute('aria-selected',t==='prev');if(t==='prev')setTimeout(fit,30);window.scrollTo({top:0})}
+$('#tab-form').onclick=()=>tab('form');$('#tab-prev').onclick=()=>tab('prev');
+
+/* ---------- toast / status ---------- */
+let toastT=0;
+function toast(m){const t=$('#toast');t.textContent=m;t.hidden=false;clearTimeout(toastT);toastT=setTimeout(()=>{t.hidden=true},2600)}
+function status(m,c){const s=$('#status');s.textContent=m||'';s.className='status '+(c||'')}
+
+/* ---------- saved CVs ---------- */
+const loadSaved=()=>{try{return JSON.parse(lsGet('rc:saved')||'[]')}catch(e){return[]}};
+function renderSaved(){
+  const l=loadSaved();
+  $('#saved-list').innerHTML=l.length?l.map((x,i)=>`<div class="s"><b>${esc(x.name)}</b><button type="button" class="btn sm" data-load="${i}">فتح</button><button type="button" class="btn del sm" data-rm="${i}">حذف</button></div>`).join(''):'<p class="hint">لسه مفيش سير محفوظة.</p>';
+}
+$('#save-btn').onclick=()=>{
+  const name=($('#save-name').value||S.d.name||'سيرة بدون اسم').trim();
+  const l=loadSaved();l.unshift({name,at:Date.now(),state:{lang:S.lang,tpl:S.tpl,d:S.d,incCerts:S.incCerts}});
+  if(lsSet('rc:saved',JSON.stringify(l.slice(0,20))))toast('تم الحفظ على هذا الجهاز');else toast('المساحة ممتلئة. احذف سيرة قديمة أو قلّل الصور.');
+  renderSaved();
+};
+$('#saved-list').addEventListener('click',e=>{
+  const b=e.target.closest('button');if(!b)return;const l=loadSaved();
+  if(b.dataset.load!==undefined){const x=l[Number(b.dataset.load)];if(x){S.lang=x.state.lang;S.tpl=x.state.tpl;S.d=x.state.d;S.incCerts=x.state.incCerts!==false;S.sample=false;buildTpls();buildForm();setLang(S.lang);tab('form')}}
+  if(b.dataset.rm!==undefined){l.splice(Number(b.dataset.rm),1);lsSet('rc:saved',JSON.stringify(l));renderSaved()}
+});
+
+/* ---------- AI polish + translate ---------- */
+let undoState=null;
+$('#ai-go').onclick=async()=>{
+  const st=$('#ai-status');st.className='status';
+  let sample;try{sample=await window.claude.use('sample')}catch(e){sample=null}
+  if(!sample){st.textContent='الصياغة بالذكاء الاصطناعي مش متاحة هنا. افتح الصفحة من حساب Claude.';st.className='status err';return}
+  const btn=$('#ai-go');btn.disabled=true;st.textContent='بفكر وبصيغ السيرة...';
+  const slim=clone(S.d);delete slim.photo;delete slim.certs;
+  const target=S.lang==='ar'?'العربية الفصحى المبسطة المناسبة لسوق العمل':'natural professional English';
+  const prompt=`أنت محرر سير ذاتية محترف. حوّل السيرة الذاتية التالية (JSON) إلى ${target}.
+القواعد:
+- الصياغة طبيعية وليست ترجمة حرفية، ومناسبة لأنظمة ATS.
+- لا تخترع أي معلومة أو رقم أو شركة أو مهارة غير موجودة. حسّن الصياغة فقط.
+- اترك أرقام الهاتف والبريد والروابط والتواريخ والأرقام كما هي. أسماء الأشخاص تُكتب بحروف اللغة المطلوبة.
+- نبذة about: 2 إلى 3 جمل قوية.
+- وصف كل خبرة desc: نقاط تبدأ بفعل قوي، سطر لكل نقطة، مفصولة بـ \\n.
+- courses وqualities وhobbies وawards: سطر لكل عنصر مفصولة بـ \\n.
+- أبقِ نفس عدد العناصر في المصفوفات exp وedu وskills وlangs ونفس ترتيبها وقيم level.
+- أعد JSON واحد فقط بنفس البنية والمفاتيح تماماً، بدون أي شرح.
+
+${JSON.stringify(slim)}`;
+  try{
+    const out=await sample.json(prompt,{cache:false});
+    undoState=clone(S.d);
+    const m=(a,b)=>{ // merge text fields, keep photo/certs/levels/counts
+      for(const k of ['name','title','about','courses','qualities','hobbies','awards'])if(typeof b[k]==='string')a[k]=b[k];
+      for(const k of ['exp','edu','skills','langs'])if(Array.isArray(b[k])&&b[k].length===a[k].length){
+        b[k].forEach((it,i)=>{for(const f of Object.keys(a[k][i]))if(f!=='level'&&typeof it[f]==='string')a[k][i][f]=it[f]})}
+    };
+    m(S.d,out);S.sample=false;syncForm();renderPreview();saveDraft();
+    $('#ai-undo').hidden=false;st.textContent='تمت الصياغة. راجع النتيجة في المعاينة.';st.className='status ok';
+  }catch(e){
+    const c=e&&e.code;
+    st.textContent=c==='not_granted'?'لازم توافق على استخدام Claude لتشغيل الصياغة.':c==='rate_limited'?'استخدمت الصياغة كتير. جرّب بعد شوية.':c==='cancelled'?'':'تعذّرت الصياغة. جرّب تاني بعد لحظات.';
+    st.className='status err';
+  }finally{btn.disabled=false}
+};
+$('#ai-undo').onclick=()=>{if(undoState){S.d=undoState;undoState=null;buildForm();renderPreview();saveDraft();$('#ai-undo').hidden=true;$('#ai-status').textContent='تم التراجع.'}};
+
+/* ---------- exports ---------- */
+const fname=ext=>{const n=(S.d.name||'CV').replace(/[\\/:*?"<>|]+/g,'').trim().replace(/\s+/g,'-')||'CV';return `${n}-CV.${ext}`};
+const OPTS_BASE={margin:0,image:{type:'jpeg',quality:.96},html2canvas:{scale:2,useCORS:true,backgroundColor:'#ffffff',scrollX:0,scrollY:0,windowWidth:794},jsPDF:{unit:'mm',format:'a4',orientation:'portrait'},pagebreak:{mode:['css']}};
+function loadScript(url){return new Promise((res,rej)=>{const e=document.createElement('script');e.src=url;e.onload=res;e.onerror=()=>{e.remove();rej(new Error(url))};document.head.appendChild(e)})}
+async function ensureH2P(){
+  if(window.html2pdf)return;
+  const urls=['html2pdf.bundle.min.js','https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js','https://cdn.jsdelivr.net/npm/html2pdf.js@0.10.1/dist/html2pdf.bundle.min.js','https://unpkg.com/html2pdf.js@0.10.1/dist/html2pdf.bundle.min.js'];
+  for(const u of urls){try{await loadScript(u);if(window.html2pdf)return}catch(e){}}
+  throw {code:'nolib'};
+}
+async function withHost(fn){
+  const host=document.createElement('div');
+  host.style.cssText='position:fixed;left:0;top:0;z-index:-1;width:794px;background:#fff';
+  host.innerHTML=cvHTML()+certPagesHTML();document.body.appendChild(host);
+  try{
+    if(document.fonts&&document.fonts.ready)await document.fonts.ready;
+    const cv=host.querySelector('.cv');if(cv){const col=S.color||('#'+(TPL[S.tpl].word.acc||'1C2539').toLowerCase());cv.style.setProperty('--user-accent',col);if(S.tpl==='t1')cv.style.setProperty('--navy',col);if(S.tpl==='t2')cv.style.setProperty('--beige',col);}const h=cv.offsetHeight;cv.style.minHeight=cv.style.height=(Math.ceil((h-2)/1123)*1123)+'px';
+    return await fn(host);
+  }finally{host.remove()}
+}
+async function makePDF(){await ensureH2P();return withHost(host=>html2pdf().set(OPTS_BASE).from(host).outputPdf('blob'))}
+async function pagesAsImages(){
+  await ensureH2P();
+  return withHost(async host=>{
+    const c=await html2pdf().set(OPTS_BASE).from(host).toCanvas().get('canvas');
+    const ph=Math.round(c.width*297/210),n=Math.max(1,Math.round(c.height/ph)),out=[];
+    for(let i=0;i<n;i++){const k=document.createElement('canvas');k.width=c.width;k.height=ph;const x=k.getContext('2d');x.fillStyle='#fff';x.fillRect(0,0,k.width,k.height);x.drawImage(c,0,i*ph,c.width,ph,0,0,c.width,ph);out.push(k.toDataURL('image/jpeg',.92))}
+    return out;
+  });
+}
+async function showImages(){
+  const imgs=await pagesAsImages();
+  $('#imgs').innerHTML=imgs.map(u=>`<img alt="" src="${u}">`).join('');
+  $('#imgov').hidden=false;
+}
+$('#imgov-close').onclick=()=>{$('#imgov').hidden=true};
+async function saveFile(name,data){
+  let dl=null;try{dl=window.claude?await window.claude.use('downloads'):null}catch(e){dl=null}
+  if(dl){
+    try{return await dl.save({filename:name,data})}
+    catch(e){if(e&&['declined','too_large','rate_limited','bad_request'].includes(e.code))throw e}
+  }
+  if(!window.claude){ // opened as a normal page: plain browser download
+    const u=URL.createObjectURL(data);const a=document.createElement('a');a.href=u;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),4000);return {status:'saved'};
+  }
+  throw {code:'unavailable'};
+}
+const errMsg=e=>{const c=e&&e.code;return c==='declined'?'تم الإلغاء.':c==='nolib'?'مكتبة التصدير ما اتحملتش. تأكد من الإنترنت وحدّث الصفحة وجرّب تاني.':c==='unavailable'?'التحميل المباشر مش متاح في العرض ده. افتح الموقع من المتصفح العادي.':'حصلت مشكلة أثناء التصدير. جرّب تاني.'};
+$('#dl-pdf').onclick=async()=>{
+  const b=$('#dl-pdf');b.disabled=true;status('بجهّز ملف PDF...');
+  try{
+    const blob=await makePDF();
+    try{await saveFile(fname('pdf'),blob);status('تم تجهيز ملف PDF.','ok')}
+    catch(e){if(e&&e.code==='unavailable'){status('بعرض الصفحات كصور للحفظ...');await showImages();status('')}else throw e}
+  }catch(e){console.error(e);status(errMsg(e),e&&e.code==='declined'?'':'err')}finally{b.disabled=false}
+};
+
+const u8=src=>{const b=atob(src.split(',')[1]);const a=new Uint8Array(b.length);for(let i=0;i<b.length;i++)a[i]=b.charCodeAt(i);return a};
+async function makeDocx(){
+  const D=window.docx;if(!D)throw {code:'nolib'};
+  const {Document,Packer,Paragraph,TextRun,Table,TableRow,TableCell,WidthType,ShadingType,AlignmentType,BorderStyle,ImageRun}=D;
+  const {lang,tpl,d}=S,rtl=lang==='ar',T=TPL[tpl],w=T.word,font=rtl?'Arial':'Calibri';
+  const NB={style:BorderStyle.NONE,size:0,color:'FFFFFF'};
+  const noB={top:NB,bottom:NB,left:NB,right:NB};
+  const run=(t,o={})=>new TextRun({text:String(t),font,size:o.size||20,bold:!!o.bold,italics:!!o.it,color:o.color,rightToLeft:rtl});
+  const P=(t,o={})=>new Paragraph({children:[run(t,o)],bidirectional:rtl,alignment:AlignmentType.START,spacing:{before:o.before||0,after:o.after==null?60:o.after},
+    border:o.line?{bottom:{style:BorderStyle.SINGLE,size:6,color:o.line,space:2}}:undefined});
+  const bullets=t=>lines(t).map(x=>P('• '+x,{size:19}));
+  const sec=(k,side)=>{
+    const col=side?w.fg:'222222',hc=side?w.fg:w.acc;
+    let body=[];
+    if(k==='info')body=[['dob',d.dob],['phone',d.phone],['email',d.email],['address',d.address],['linkedin',d.linkedin]].filter(x=>x[1]).map(x=>P(x[1],{size:19,color:col}));
+    else if(k==='about')body=d.about?[P(d.about,{size:20,color:col})]:[];
+    else if(k==='exp'||k==='edu')body=(d[k]||[]).flatMap(it=>{
+      const hd=k==='exp'?[it.role,it.company]:[it.degree,it.school];const r=range(it);
+      if(!(hd[0]||hd[1]||it.desc))return[];
+      return [P(hd.filter(Boolean).join(' — '),{bold:true,size:21,color:col,before:80,after:20}),...(r?[P(r,{size:18,color:side?w.fg:'666666',it:true,after:20})]:[]),...bullets(it.desc).map(x=>x)];
+    });
+    else if(k==='skills'||k==='langs')body=(d[k]||[]).filter(x=>x.name).map(x=>P(`${x.name} — ${lvl(x.level)}%`,{size:19,color:col}));
+    else body=bullets(d[k]).length?lines(d[k]).map(x=>P('• '+x,{size:19,color:col})):[];
+    if(!body.length)return[];
+    const t=title(tpl,lang,k);
+    return [...(t?[P(t,{bold:true,size:23,color:hc,line:side?w.fg:w.acc,before:200,after:80})]:[]),...body];
+  };
+  if(!w.side){
+    const kids=[];
+    if(d.photo){const dm=await new Promise(res=>{const im=new Image();im.onload=()=>res({w:im.width,h:im.height});im.onerror=()=>res({w:3,h:4});im.src=d.photo});
+      kids.push(new Paragraph({children:[new ImageRun({data:u8(d.photo),type:'jpg',transformation:{width:84,height:Math.round(84*dm.h/dm.w)}})],alignment:AlignmentType.CENTER,spacing:{after:80}}))}
+    const C=(t,o)=>new Paragraph({children:[run(t,o)],bidirectional:rtl,alignment:AlignmentType.CENTER,spacing:{before:0,after:o.after==null?60:o.after},
+      border:o.line?{bottom:{style:BorderStyle.SINGLE,size:12,color:o.line,space:4}}:undefined});
+    kids.push(C(d.name||'',{bold:true,size:48,color:w.acc,after:20}));
+    if(d.title)kids.push(C(d.title,{size:26,color:'555555',after:60}));
+    const ct=[d.phone,d.email,d.address,d.linkedin,d.dob].filter(Boolean).join('  |  ');
+    if(ct)kids.push(C(ct,{size:19,color:'333333',after:160,line:w.acc}));
+    T.main.forEach(k=>kids.push(...sec(k,false)));
+    const secs=[{properties:{page:{margin:{top:1000,right:1000,bottom:1000,left:1000}}},children:kids}];
+    if(S.incCerts&&(d.certs||[]).length){
+      secs.push({properties:{page:{margin:{top:720,right:720,bottom:720,left:720}}},children:[P(L[lang].certs,{bold:true,size:32,after:200}),
+        ...d.certs.map(c=>new Paragraph({children:[new ImageRun({data:u8(c.src),type:'jpg',transformation:{width:520,height:Math.round(520*c.h/c.w)}})],spacing:{after:200}}))]});
+    }
+    return Packer.toBlob(new Document({sections:secs}));
+  }
+  const sideKids=[];
+  if(d.photo)sideKids.push(new Paragraph({children:[new ImageRun({data:u8(d.photo),type:'jpg',transformation:{width:140,height:175}})],bidirectional:rtl,alignment:AlignmentType.START,spacing:{after:120}}));
+  T.side.forEach(k=>sideKids.push(...sec(k,true)));
+  const mainKids=[P(d.name||'',{bold:true,size:44,color:w.acc==='B8A58C'?'23282E':w.acc==='8F6A9F'?'111111':w.acc,after:20}),P(d.title||'',{size:26,color:'555555',after:160})];
+  T.main.forEach(k=>mainKids.push(...sec(k,false)));
+  const total=11906,sideW=w.sideW,mainW=total-sideW;
+  const cell=(kids,wd,fill,m)=>new TableCell({children:kids.length?kids:[new Paragraph({})],width:{size:wd,type:WidthType.DXA},borders:noB,
+    shading:fill?{type:ShadingType.CLEAR,color:'auto',fill}:undefined,margins:{top:360,bottom:360,left:m,right:m}});
+  const table=new Table({width:{size:total,type:WidthType.DXA},columnWidths:[sideW,mainW],visuallyRightToLeft:rtl,
+    borders:{top:NB,bottom:NB,left:NB,right:NB,insideHorizontal:NB,insideVertical:NB},
+    rows:[new TableRow({children:[cell(sideKids,sideW,w.side,260),cell(mainKids,mainW,null,380)]})]});
+  const sections=[{properties:{page:{margin:{top:0,right:0,bottom:0,left:0}}},children:[table,new Paragraph({children:[new TextRun({text:'',size:2})],spacing:{before:0,after:0,line:20,lineRule:'exact'}})]}];
+  if(S.incCerts&&(d.certs||[]).length){
+    sections.push({properties:{page:{margin:{top:720,right:720,bottom:720,left:720}}},children:[P(L[lang].certs,{bold:true,size:32,after:200}),
+      ...d.certs.map(c=>new Paragraph({children:[new ImageRun({data:u8(c.src),type:'jpg',transformation:{width:520,height:Math.round(520*c.h/c.w)}})],spacing:{after:200}}))]});
+  }
+  return Packer.toBlob(new Document({sections}));
+}
+$('#dl-docx').onclick=async()=>{
+  const b=$('#dl-docx');b.disabled=true;status('بجهّز ملف Word...');
+  try{const blob=await makeDocx();await saveFile(fname('docx'),blob);status('تم تجهيز ملف Word. هو نص قابل للتعديل ومناسب لـ ATS.','ok')}
+  catch(e){console.error(e);status(errMsg(e),e&&e.code==='declined'?'':'err')}finally{b.disabled=false}
+};
+
+/* ---------- boot ---------- */
+$('#wa-num').value=lsGet('rc:wa')||'';
+buildTpls();buildForm();renderSaved();if(S.color)$('#cv-color').value=S.color;
+$('#lang-ar').setAttribute('aria-pressed',S.lang==='ar');$('#lang-en').setAttribute('aria-pressed',S.lang==='en');
+renderPreview();
+})();
+</script>
+
+</body></html>
