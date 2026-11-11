@@ -373,9 +373,11 @@ button{cursor:pointer}
         <p>اكتب بياناتك زي ما تحب بأي لغة، وبضغطة واحدة تتصاغ وتترجم للغة السيرة المختارة بأسلوب طبيعي ومناسب لأنظمة ATS. مش بيخترع معلومات.</p>
         <div style="display:flex;gap:8px;flex-wrap:wrap">
           <button type="button" class="btn pri" id="ai-go">صياغة وترجمة للغة الحالية</button>
+          <button type="button" class="btn" id="ai-copy">نسخ طلب الصياغة لمساعد ذكاء اصطناعي</button>
           <button type="button" class="btn" id="ai-undo" hidden>تراجع</button>
         </div>
         <div class="status" id="ai-status" style="margin:8px 0 0"></div>
+        <div id="ai-manual" hidden style="margin-top:8px"><label class="f"><span>الصقي هنا JSON الذي أعاده المساعد بعد استخدام الطلب المنسوخ</span><textarea id="ai-answer" rows="5" dir="ltr" placeholder="{ ... }"></textarea></label><button type="button" class="btn sm" id="ai-apply" style="margin-top:6px">تطبيق الصياغة على السيرة</button></div>
       </div>
       <div id="sample-note" class="sample-note" hidden><span>الصفحة فيها بيانات تجريبية لتشوف شكل القوالب.</span><button type="button" class="btn sm" id="clear-all">امسح وابدأ ببياناتك</button></div>
       <div class="card" id="import-card">
@@ -383,10 +385,10 @@ button{cursor:pointer}
         <label class="f"><span>الصق بيانات غير مرتبة هنا</span><textarea id="bulk-text" rows="5" placeholder="مثال: الاسم، الهاتف، البريد، الخبرات والتعليم والمهارات..."></textarea></label>
         <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;align-items:center">
           <button type="button" class="btn pri" id="parse-text">استخراج البيانات</button>
-          <label class="btn" for="resume-file">استيراد ملف نصي أو PDF</label>
-          <input id="resume-file" type="file" accept=".txt,.pdf,text/plain,application/pdf" hidden>
+          <label class="btn" for="resume-file">استيراد TXT أو PDF أو Word</label>
+          <input id="resume-file" type="file" accept=".txt,.pdf,.docx,text/plain,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document" hidden>
         </div>
-        <p class="hint">يتم الاستخراج محليًا على جهازك. ملفات PDF النصية مدعومة؛ ملفات الصور/المسح الضوئي قد تحتاج OCR. راجع البيانات بعد الاستيراد.</p>
+        <p class="hint">يتم الاستخراج محليًا على جهازك. ملفات PDF النصية وWord DOCX وTXT مدعومة؛ ملفات PDF المصورة قد تحتاج OCR. راجع البيانات بعد الاستيراد.</p>
         <div class="status" id="import-status"></div>
       </div>
       <div class="card" id="color-card">
@@ -398,10 +400,12 @@ button{cursor:pointer}
       </div>
       <div id="form"></div>
       <div class="card" id="saved-card">
-        <h2>سيرك المحفوظة <small>على هذا الجهاز فقط</small></h2>
+        <h2>العملاء والطلبات المحفوظة <small>على هذا الجهاز</small></h2>
         <div class="grid2" style="align-items:end">
-          <label class="f"><span>اسم السيرة</span><input id="save-name" placeholder="مثال: سيرة محمد - محاسب"></label>
-          <button type="button" class="btn" id="save-btn">حفظ</button>
+          <label class="f"><span>اسم العميل</span><input id="save-name" placeholder="اسم العميل"></label>
+          <label class="f"><span>رقم الموبايل / واتساب</span><input id="client-phone" type="tel" inputmode="tel" dir="ltr" placeholder="01XXXXXXXXX"></label>
+          <label class="f"><span>حالة الطلب</span><select id="order-status"><option>قيد الإعداد</option><option>جاهز للإرسال</option><option>تم الإرسال</option></select></label>
+          <button type="button" class="btn pri" id="save-btn">حفظ بيانات العميل والطلب</button>
         </div>
         <div class="saved" id="saved-list"></div>
       </div>
@@ -412,11 +416,13 @@ button{cursor:pointer}
         <button type="button" class="btn pri" id="dl-pdf">تحميل PDF</button>
         <button type="button" class="btn pri" id="dl-docx">تحميل Word</button>
       </div>
+      <p class="hint" style="margin:-5px 0 8px">ملف Word يحافظ على شكل المعاينة كصفحات صور؛ محتواه البصري ثابت وليس نصًا للتحرير.</p>
       <div class="wa-row">
         <label class="f"><span>رقم واتساب للمشاركة</span><input id="wa-num" inputmode="tel" dir="ltr" placeholder="01XXXXXXXXX"></label>
         <a class="btn wa" id="wa-link" href="#" target="_blank" rel="noopener">فتح واتساب</a>
       </div>
-      <p class="hint" style="margin:-4px 0 8px">حمّل الملفين الأول، وبعدها ارفقهم في محادثة واتساب. المتصفح مش بيسمح بإرسال الملفات تلقائياً.</p>
+      <p class="hint" style="margin:-4px 0 8px">على الموبايل جرّبي «مشاركة الملفين» ثم اختاري واتساب واضغطي إرسال. قد يطلب المتصفح تأكيد المشاركة.</p>
+      <button type="button" class="btn wa" id="share-files" style="margin:0 0 10px">تجهيز ومشاركة PDF وWord على واتساب</button>
       <div class="status" id="status" role="status"></div>
       <div class="stage" id="stage"><div class="scaler" id="scaler"><div id="pages"></div></div></div>
     </div>
@@ -641,7 +647,7 @@ function waNumber(raw){
   return n;
 }
 function updateWA(){
-  const a=$('#wa-link');const num=waNumber($('#wa-num').value);
+  const a=$('#wa-link');const num=waNumber($('#wa-num').value||$('#client-phone')?.value||'');
   const name=S.d.name||'';
   const msg=S.lang==='ar'?`مرفق السيرة الذاتية${name?' الخاصة بـ '+name:''}.`:`Please find attached the CV${name?' of '+name:''}.`;
   a.href='https://wa.me/'+(num||'')+'?text='+encodeURIComponent(msg);
@@ -749,7 +755,7 @@ function detectBulk(text){
 function mergeImported(base,imp){for(const k of ['name','title','phone','email','address','linkedin','about','courses'])if(imp[k])base[k]=imp[k];for(const k of ['exp','edu','skills','langs'])if(imp[k]&&imp[k].length&&imp[k].some(x=>Object.values(x).some(Boolean)))base[k]=imp[k];}
 function importText(text){const imp=detectBulk(text);const n=Object.values(imp).filter(v=>typeof v==='string'?!!v:Array.isArray(v)&&v.some(x=>Object.values(x).some(Boolean))).length;if(!n)return 0;if(S.sample)S.d=BLANK();mergeImported(S.d,imp);S.sample=false;buildForm();renderPreview();saveDraft();return n}
 $('#parse-text').onclick=()=>{const n=importText($('#bulk-text').value);const el=$('#import-status');el.textContent=n?`تم استخراج بيانات مبدئية (${n} حقول/أقسام). راجعها وعدّلها.`:'لم أتعرف على بيانات واضحة؛ جرّب لصق النص كاملًا مع عناوين مثل الاسم والهاتف والتعليم.';el.className='status '+(n?'ok':'err')};
-$('#resume-file').addEventListener('change',async e=>{const f=e.target.files[0];if(!f)return;const st=$('#import-status');try{let txt='';if(f.type==='text/plain'||/\.txt$/i.test(f.name))txt=await f.text();else if(f.type==='application/pdf'||/\.pdf$/i.test(f.name)){st.textContent='جاري قراءة PDF…';if(!window.pdfjsLib){await loadScript('pdf.min.js');window.pdfjsLib.GlobalWorkerOptions.workerSrc='pdf.worker.min.js'}const pdf=await pdfjsLib.getDocument({data:new Uint8Array(await f.arrayBuffer())}).promise;for(let i=1;i<=pdf.numPages;i++){const page=await pdf.getPage(i);const c=await page.getTextContent();txt+=c.items.map(x=>x.str).join(' ')+'\n'}}else throw Error('النوع غير مدعوم');$('#bulk-text').value=txt;const n=importText(txt);st.textContent=n?`تمت قراءة الملف واستخراج بيانات مبدئية (${n}). راجعها في النموذج.`:'تمت قراءة الملف لكن لم تظهر بيانات قابلة للاستخراج؛ قد يكون ممسوحًا ضوئيًا.';st.className='status '+(n?'ok':'err')}catch(err){st.textContent='تعذرت قراءة الملف. جرّب PDF نصيًا أو انسخ النص والصقه.';st.className='status err'}finally{e.target.value=''}});
+$('#resume-file').addEventListener('change',async e=>{const f=e.target.files[0];if(!f)return;const st=$('#import-status');try{let txt='';if(f.type==='text/plain'||/\.txt$/i.test(f.name))txt=await f.text();else if(f.type==='application/pdf'||/\.pdf$/i.test(f.name)){st.textContent='جاري قراءة PDF…';if(!window.pdfjsLib){await loadScript('pdf.min.js');window.pdfjsLib.GlobalWorkerOptions.workerSrc='pdf.worker.min.js'}const pdfData=new Uint8Array(await f.arrayBuffer());let pdf;try{pdf=await pdfjsLib.getDocument({data:pdfData}).promise}catch(workerError){pdf=await pdfjsLib.getDocument({data:pdfData,disableWorker:true}).promise;}for(let i=1;i<=pdf.numPages;i++){const page=await pdf.getPage(i);const c=await page.getTextContent();txt+=c.items.map(x=>x.str+(x.hasEOL?'\n':' ')).join('')+'\n'}}else if(/\.docx$/i.test(f.name)){st.textContent='جاري قراءة ملف Word…';if(!window.mammoth)await loadScript('mammoth.browser.min.js');const result=await window.mammoth.extractRawText({arrayBuffer:await f.arrayBuffer()});txt=result.value}else throw Error('النوع غير مدعوم');$('#bulk-text').value=txt;const n=importText(txt);st.textContent=n?`تمت قراءة الملف واستخراج بيانات مبدئية (${n}). راجعها في النموذج.`:'تمت قراءة الملف لكن لم تظهر بيانات قابلة للاستخراج؛ قد يكون ممسوحًا ضوئيًا.';st.className='status '+(n?'ok':'err')}catch(err){st.textContent='تعذرت قراءة الملف. جرّب PDF نصيًا أو انسخ النص والصقه.';st.className='status err'}finally{e.target.value=''}});
 $('#cv-color').addEventListener('input',e=>{S.color=e.target.value;renderPreview();saveDraft()});
 $('#reset-color').onclick=()=>{S.color='';$('#cv-color').value=TPL[S.tpl].word.acc?'#'+TPL[S.tpl].word.acc.toLowerCase():'#1c2539';renderPreview();saveDraft()};
 
@@ -777,21 +783,26 @@ let toastT=0;
 function toast(m){const t=$('#toast');t.textContent=m;t.hidden=false;clearTimeout(toastT);toastT=setTimeout(()=>{t.hidden=true},2600)}
 function status(m,c){const s=$('#status');s.textContent=m||'';s.className='status '+(c||'')}
 
-/* ---------- saved CVs ---------- */
+/* ---------- saved customer records ---------- */
 const loadSaved=()=>{try{return JSON.parse(lsGet('rc:saved')||'[]')}catch(e){return[]}};
 function renderSaved(){
   const l=loadSaved();
-  $('#saved-list').innerHTML=l.length?l.map((x,i)=>`<div class="s"><b>${esc(x.name)}</b><button type="button" class="btn sm" data-load="${i}">فتح</button><button type="button" class="btn del sm" data-rm="${i}">حذف</button></div>`).join(''):'<p class="hint">لسه مفيش سير محفوظة.</p>';
+  $('#saved-list').innerHTML=l.length?l.map((x,i)=>`<div class="s"><b>${esc(x.clientName||x.name)}${x.phone?` · ${esc(x.phone)}`:''}${x.orderStatus?` · ${esc(x.orderStatus)}`:''}</b><button type="button" class="btn sm" data-load="${i}">استدعاء</button><button type="button" class="btn del sm" data-rm="${i}">حذف</button></div>`).join(''):'<p class="hint">لا توجد طلبات محفوظة بعد. أدخلي اسم العميل ورقمه ثم احفظي الطلب.</p>';
 }
 $('#save-btn').onclick=()=>{
-  const name=($('#save-name').value||S.d.name||'سيرة بدون اسم').trim();
-  const l=loadSaved();l.unshift({name,at:Date.now(),state:{lang:S.lang,tpl:S.tpl,d:S.d,incCerts:S.incCerts}});
-  if(lsSet('rc:saved',JSON.stringify(l.slice(0,20))))toast('تم الحفظ على هذا الجهاز');else toast('المساحة ممتلئة. احذف سيرة قديمة أو قلّل الصور.');
+  const clientName=($('#save-name').value||S.d.name||'عميل بدون اسم').trim();
+  const phone=($('#client-phone').value||S.d.phone||'').trim();
+  if(!phone){toast('اكتبي رقم موبايل العميل قبل الحفظ.');$('#client-phone').focus();return}
+  const l=loadSaved();const state={lang:S.lang,tpl:S.tpl,d:S.d,incCerts:S.incCerts,color:S.color};
+  const existing=l.findIndex(x=>x.phone===phone);
+  const orderStatus=$('#order-status').value||'قيد الإعداد';const row={name:clientName,clientName,phone,orderStatus,at:Date.now(),state};
+  if(existing>=0)l[existing]=row;else l.unshift(row);
+  if(lsSet('rc:saved',JSON.stringify(l.slice(0,100))))toast(existing>=0?'تم تحديث طلب العميل':'تم حفظ العميل والطلب على هذا الجهاز');else toast('تعذر الحفظ. قلّلي حجم الصور أو احذفي طلبات قديمة.');
   renderSaved();
 };
 $('#saved-list').addEventListener('click',e=>{
   const b=e.target.closest('button');if(!b)return;const l=loadSaved();
-  if(b.dataset.load!==undefined){const x=l[Number(b.dataset.load)];if(x){S.lang=x.state.lang;S.tpl=x.state.tpl;S.d=x.state.d;S.incCerts=x.state.incCerts!==false;S.sample=false;buildTpls();buildForm();setLang(S.lang);tab('form')}}
+  if(b.dataset.load!==undefined){const x=l[Number(b.dataset.load)];if(x){const st=x.state||{};S.lang=st.lang||'ar';S.tpl=st.tpl||'t1';S.d=st.d||BLANK();S.incCerts=st.incCerts!==false;S.color=st.color||'';S.sample=false;$('#save-name').value=x.clientName||x.name||'';$('#client-phone').value=x.phone||'';$('#order-status').value=x.orderStatus||'قيد الإعداد';buildTpls();buildForm();setLang(S.lang);$('#cv-color').value=S.color||('#'+(TPL[S.tpl].word.acc||'1C2539').toLowerCase());renderPreview();tab('form')}}
   if(b.dataset.rm!==undefined){l.splice(Number(b.dataset.rm),1);lsSet('rc:saved',JSON.stringify(l));renderSaved()}
 });
 
@@ -800,7 +811,7 @@ let undoState=null;
 $('#ai-go').onclick=async()=>{
   const st=$('#ai-status');st.className='status';
   let sample;try{sample=await window.claude.use('sample')}catch(e){sample=null}
-  if(!sample){st.textContent='الصياغة بالذكاء الاصطناعي مش متاحة هنا. افتح الصفحة من حساب Claude.';st.className='status err';return}
+  if(!sample){st.textContent='الذكاء الاصطناعي التلقائي يحتاج خادمًا آمنًا ومفتاح خدمة؛ هذا ملف HTML مستقل فلا يرسل بياناتك لأي جهة. استخدمي زر نسخ الطلب لمساعد ذكاء اصطناعي خارجي أو اربطي نسخة مستضافة بخادم.';st.className='status err';return}
   const btn=$('#ai-go');btn.disabled=true;st.textContent='بفكر وبصيغ السيرة...';
   const slim=clone(S.d);delete slim.photo;delete slim.certs;
   const target=S.lang==='ar'?'العربية الفصحى المبسطة المناسبة لسوق العمل':'natural professional English';
@@ -832,11 +843,19 @@ ${JSON.stringify(slim)}`;
     st.className='status err';
   }finally{btn.disabled=false}
 };
+function makeManualAIPrompt(){
+  const slim=clone(S.d);delete slim.photo;delete slim.certs;
+  const target=S.lang==='ar'?'العربية الفصحى المبسطة المناسبة لسوق العمل':'natural professional English';
+  return `أنت محرر سير ذاتية محترف. أعد صياغة السيرة التالية إلى ${target}، واجعلها واضحة ومناسبة لأنظمة ATS. لا تخترع أي معلومة أو رقم أو جهة أو مهارة. أبقِ نفس مفاتيح JSON وبنية العناصر والترتيب وقيم مستوى المهارة. أعد JSON فقط دون شروح.\\n${JSON.stringify(slim)}`;
+}
+$('#ai-copy').onclick=async()=>{try{await navigator.clipboard.writeText(makeManualAIPrompt());$('#ai-manual').hidden=false;$('#ai-status').textContent='انسخي الطلب إلى مساعد الذكاء الاصطناعي الذي تختارينه، ثم الصقي JSON الناتج هنا. لا يوجد إرسال تلقائي من الملف المستقل.';$('#ai-status').className='status'}catch(e){$('#ai-status').textContent='تعذر النسخ تلقائيًا. افتحي التطبيق عبر رابط HTTPS ثم جرّبي مجددًا.';$('#ai-status').className='status err'}};
+$('#ai-apply').onclick=()=>{try{const raw=$('#ai-answer').value.replace(/^```(?:json)?\s*/i,'').replace(/```\s*$/,'').trim();const out=JSON.parse(raw);undoState=clone(S.d);for(const k of ['name','title','about','courses','qualities','hobbies','awards'])if(typeof out[k]==='string')S.d[k]=out[k];for(const k of ['exp','edu','skills','langs'])if(Array.isArray(out[k])&&Array.isArray(S.d[k])&&out[k].length===S.d[k].length)out[k].forEach((it,i)=>Object.keys(S.d[k][i]).forEach(f=>{if(f!=='level'&&typeof it[f]==='string')S.d[k][i][f]=it[f]}));S.sample=false;buildForm();renderPreview();saveDraft();$('#ai-undo').hidden=false;$('#ai-status').textContent='تم تطبيق النص. راجعيه قبل التصدير.';$('#ai-status').className='status ok'}catch(e){$('#ai-status').textContent='لم أستطع قراءة الرد كـ JSON. الصقي كائن JSON فقط دون علامات ```.';$('#ai-status').className='status err'}};
+
 $('#ai-undo').onclick=()=>{if(undoState){S.d=undoState;undoState=null;buildForm();renderPreview();saveDraft();$('#ai-undo').hidden=true;$('#ai-status').textContent='تم التراجع.'}};
 
 /* ---------- exports ---------- */
 const fname=ext=>{const n=(S.d.name||'CV').replace(/[\\/:*?"<>|]+/g,'').trim().replace(/\s+/g,'-')||'CV';return `${n}-CV.${ext}`};
-const OPTS_BASE={margin:0,image:{type:'jpeg',quality:.96},html2canvas:{scale:2,useCORS:true,backgroundColor:'#ffffff',scrollX:0,scrollY:0,windowWidth:794},jsPDF:{unit:'mm',format:'a4',orientation:'portrait'},pagebreak:{mode:['css']}};
+const OPTS_BASE={margin:0,image:{type:'jpeg',quality:.96},html2canvas:{scale:2,useCORS:true,backgroundColor:'#ffffff',scrollX:0,scrollY:0,windowWidth:794,onclone:(doc)=>{const el=doc.getElementById('export-root');if(el){el.style.position='absolute';el.style.left='0';el.style.top='0';el.style.zIndex='1';el.style.opacity='1';el.style.visibility='visible'}}},jsPDF:{unit:'mm',format:'a4',orientation:'portrait'},pagebreak:{mode:['css']}};
 function loadScript(url){return new Promise((res,rej)=>{const e=document.createElement('script');e.src=url;e.onload=res;e.onerror=()=>{e.remove();rej(new Error(url))};document.head.appendChild(e)})}
 async function ensureH2P(){
   if(window.html2pdf)return;
@@ -846,21 +865,37 @@ async function ensureH2P(){
 }
 async function withHost(fn){
   const host=document.createElement('div');
-  host.style.cssText='position:fixed;left:0;top:0;z-index:-1;width:794px;background:#fff';
+  const shield=document.createElement('div');shield.id='export-shield';
+  shield.style.cssText='position:fixed;inset:0;z-index:100000;background:rgba(244,245,247,.97);display:grid;place-items:center;font:700 18px Cairo,Arial,sans-serif;color:#16213a';
+  shield.textContent='جاري تجهيز الملف، من فضلك انتظري…';
+  host.id='export-root';host.style.cssText='position:fixed;left:0;top:0;z-index:99999;width:794px;background:#fff;opacity:1;pointer-events:none';
   host.innerHTML=cvHTML()+certPagesHTML();document.body.appendChild(host);
+  document.body.appendChild(shield);
   try{
     if(document.fonts&&document.fonts.ready)await document.fonts.ready;
-    const cv=host.querySelector('.cv');if(cv){const col=S.color||('#'+(TPL[S.tpl].word.acc||'1C2539').toLowerCase());cv.style.setProperty('--user-accent',col);if(S.tpl==='t1')cv.style.setProperty('--navy',col);if(S.tpl==='t2')cv.style.setProperty('--beige',col);}const h=cv.offsetHeight;cv.style.minHeight=cv.style.height=(Math.ceil((h-2)/1123)*1123)+'px';
+    const cv=host.querySelector('.cv');if(cv){const col=S.color||('#'+(TPL[S.tpl].word.acc||'1C2539').toLowerCase());cv.style.setProperty('--user-accent',col);if(S.tpl==='t1')cv.style.setProperty('--navy',col);if(S.tpl==='t2')cv.style.setProperty('--beige',col);cv.querySelectorAll('.sec').forEach(x=>x.style.marginBottom='12px');cv.querySelectorAll('.e').forEach(x=>x.style.marginBottom='8px');const h=cv.offsetHeight;if(h<=1200){cv.style.height='1120px';cv.style.minHeight='1120px';cv.style.overflow='hidden';}}
+    host.style.height=Math.max(host.scrollHeight,1123)+'px';
     return await fn(host);
-  }finally{host.remove()}
+  }finally{host.remove();shield.remove()}
 }
-async function makePDF(){await ensureH2P();return withHost(host=>html2pdf().set(OPTS_BASE).from(host).outputPdf('blob'))}
+async function makePDF(){
+  await ensureH2P();
+  return withHost(async host=>{
+    const worker=html2pdf().set(OPTS_BASE).from(host.querySelector('.cv')).toPdf();
+    const pdf=await worker.get('pdf');let n=0;
+    for(const cert of host.querySelectorAll('.certpg')){
+      const canvas=await html2pdf().set(OPTS_BASE).from(cert).toCanvas().get('canvas');
+      pdf.addPage('a4','portrait');pdf.addImage(canvas,'JPEG',0,0,210,297,`certificate-${++n}`,'FAST');
+    }
+    return pdf.output('blob');
+  });
+}
 async function pagesAsImages(){
   await ensureH2P();
   return withHost(async host=>{
-    const c=await html2pdf().set(OPTS_BASE).from(host).toCanvas().get('canvas');
-    const ph=Math.round(c.width*297/210),n=Math.max(1,Math.round(c.height/ph)),out=[];
-    for(let i=0;i<n;i++){const k=document.createElement('canvas');k.width=c.width;k.height=ph;const x=k.getContext('2d');x.fillStyle='#fff';x.fillRect(0,0,k.width,k.height);x.drawImage(c,0,i*ph,c.width,ph,0,0,c.width,ph);out.push(k.toDataURL('image/jpeg',.92))}
+    const nodes=[host.querySelector('.cv'),...host.querySelectorAll('.certpg')],out=[];
+    for(const node of nodes){const c=await html2pdf().set(OPTS_BASE).from(node).toCanvas().get('canvas');const ph=Math.round(c.width*297/210),n=Math.max(1,Math.ceil(c.height/ph));
+      for(let i=0;i<n;i++){const k=document.createElement('canvas');k.width=c.width;k.height=ph;const x=k.getContext('2d');x.fillStyle='#fff';x.fillRect(0,0,k.width,k.height);const h=Math.min(ph,c.height-i*ph);if(h>0)x.drawImage(c,0,i*ph,c.width,h,0,0,c.width,h);out.push(k.toDataURL('image/jpeg',.95))}}
     return out;
   });
 }
@@ -891,77 +926,42 @@ $('#dl-pdf').onclick=async()=>{
   }catch(e){console.error(e);status(errMsg(e),e&&e.code==='declined'?'':'err')}finally{b.disabled=false}
 };
 
+async function generateCVFiles(){
+  const pdf=await makePDF();const word=await makeDocx();
+  return [new File([pdf],fname('pdf'),{type:'application/pdf'}),new File([word],fname('docx'),{type:'application/vnd.openxmlformats-officedocument.wordprocessingml.document'})];
+}
+let pendingShareFiles=null;
+$('#share-files').onclick=async()=>{
+  const btn=$('#share-files');
+  if(pendingShareFiles){
+    if(navigator.share&&navigator.canShare&&navigator.canShare({files:pendingShareFiles})){
+      try{await navigator.share({files:pendingShareFiles,title:'السيرة الذاتية',text:`السيرة الذاتية${S.d.name?' - '+S.d.name:''}`});status('اختاري واتساب والعميل ثم أكّدي الإرسال داخل واتساب.','ok');pendingShareFiles=null;btn.textContent='تجهيز ومشاركة PDF وWord على واتساب'}catch(e){if(e&&e.name==='AbortError')status('لم يتم الإرسال؛ الملفان ما زالا جاهزين للمشاركة.');else status('تعذرت المشاركة؛ حمّلي الملفين واستخدمي زر واتساب.','err')}return;
+    }
+    try{await saveFile(fname('pdf'),pendingShareFiles[0]);await saveFile(fname('docx'),pendingShareFiles[1]);updateWA();window.open($('#wa-link').href,'_blank','noopener');status('تم تنزيل الملفين وفتح محادثة واتساب. أرفقيهما واضغطي إرسال.','ok');pendingShareFiles=null;btn.textContent='تجهيز ومشاركة PDF وWord على واتساب'}catch(e){status('تعذر تنزيل الملفين تلقائيًا؛ استخدمي زري تحميل PDF وWord.','err')}return;
+  }
+  btn.disabled=true;status('بجهّز ملف PDF وWord للمشاركة…');
+  try{pendingShareFiles=await generateCVFiles();btn.textContent='الملفان جاهزان — اضغطي هنا لاختيار واتساب';status('الملفان جاهزان. اضغطي الزر مرة ثانية لفتح قائمة المشاركة، ثم اختاري واتساب والعميل.','ok')}
+  catch(e){console.error(e);pendingShareFiles=null;status('تعذّر تجهيز المشاركة؛ جرّبي تنزيل الملفين كلٌّ على حدة.','err')}
+  finally{btn.disabled=false}
+};
+
 const u8=src=>{const b=atob(src.split(',')[1]);const a=new Uint8Array(b.length);for(let i=0;i<b.length;i++)a[i]=b.charCodeAt(i);return a};
 async function makeDocx(){
   const D=window.docx;if(!D)throw {code:'nolib'};
-  const {Document,Packer,Paragraph,TextRun,Table,TableRow,TableCell,WidthType,ShadingType,AlignmentType,BorderStyle,ImageRun}=D;
-  const {lang,tpl,d}=S,rtl=lang==='ar',T=TPL[tpl],w=T.word,font=rtl?'Arial':'Calibri';
-  const NB={style:BorderStyle.NONE,size:0,color:'FFFFFF'};
-  const noB={top:NB,bottom:NB,left:NB,right:NB};
-  const run=(t,o={})=>new TextRun({text:String(t),font,size:o.size||20,bold:!!o.bold,italics:!!o.it,color:o.color,rightToLeft:rtl});
-  const P=(t,o={})=>new Paragraph({children:[run(t,o)],bidirectional:rtl,alignment:AlignmentType.START,spacing:{before:o.before||0,after:o.after==null?60:o.after},
-    border:o.line?{bottom:{style:BorderStyle.SINGLE,size:6,color:o.line,space:2}}:undefined});
-  const bullets=t=>lines(t).map(x=>P('• '+x,{size:19}));
-  const sec=(k,side)=>{
-    const col=side?w.fg:'222222',hc=side?w.fg:w.acc;
-    let body=[];
-    if(k==='info')body=[['dob',d.dob],['phone',d.phone],['email',d.email],['address',d.address],['linkedin',d.linkedin]].filter(x=>x[1]).map(x=>P(x[1],{size:19,color:col}));
-    else if(k==='about')body=d.about?[P(d.about,{size:20,color:col})]:[];
-    else if(k==='exp'||k==='edu')body=(d[k]||[]).flatMap(it=>{
-      const hd=k==='exp'?[it.role,it.company]:[it.degree,it.school];const r=range(it);
-      if(!(hd[0]||hd[1]||it.desc))return[];
-      return [P(hd.filter(Boolean).join(' — '),{bold:true,size:21,color:col,before:80,after:20}),...(r?[P(r,{size:18,color:side?w.fg:'666666',it:true,after:20})]:[]),...bullets(it.desc).map(x=>x)];
-    });
-    else if(k==='skills'||k==='langs')body=(d[k]||[]).filter(x=>x.name).map(x=>P(`${x.name} — ${lvl(x.level)}%`,{size:19,color:col}));
-    else body=bullets(d[k]).length?lines(d[k]).map(x=>P('• '+x,{size:19,color:col})):[];
-    if(!body.length)return[];
-    const t=title(tpl,lang,k);
-    return [...(t?[P(t,{bold:true,size:23,color:hc,line:side?w.fg:w.acc,before:200,after:80})]:[]),...body];
-  };
-  if(!w.side){
-    const kids=[];
-    if(d.photo){const dm=await new Promise(res=>{const im=new Image();im.onload=()=>res({w:im.width,h:im.height});im.onerror=()=>res({w:3,h:4});im.src=d.photo});
-      kids.push(new Paragraph({children:[new ImageRun({data:u8(d.photo),type:'jpg',transformation:{width:84,height:Math.round(84*dm.h/dm.w)}})],alignment:AlignmentType.CENTER,spacing:{after:80}}))}
-    const C=(t,o)=>new Paragraph({children:[run(t,o)],bidirectional:rtl,alignment:AlignmentType.CENTER,spacing:{before:0,after:o.after==null?60:o.after},
-      border:o.line?{bottom:{style:BorderStyle.SINGLE,size:12,color:o.line,space:4}}:undefined});
-    kids.push(C(d.name||'',{bold:true,size:48,color:w.acc,after:20}));
-    if(d.title)kids.push(C(d.title,{size:26,color:'555555',after:60}));
-    const ct=[d.phone,d.email,d.address,d.linkedin,d.dob].filter(Boolean).join('  |  ');
-    if(ct)kids.push(C(ct,{size:19,color:'333333',after:160,line:w.acc}));
-    T.main.forEach(k=>kids.push(...sec(k,false)));
-    const secs=[{properties:{page:{margin:{top:1000,right:1000,bottom:1000,left:1000}}},children:kids}];
-    if(S.incCerts&&(d.certs||[]).length){
-      secs.push({properties:{page:{margin:{top:720,right:720,bottom:720,left:720}}},children:[P(L[lang].certs,{bold:true,size:32,after:200}),
-        ...d.certs.map(c=>new Paragraph({children:[new ImageRun({data:u8(c.src),type:'jpg',transformation:{width:520,height:Math.round(520*c.h/c.w)}})],spacing:{after:200}}))]});
-    }
-    return Packer.toBlob(new Document({sections:secs}));
-  }
-  const sideKids=[];
-  if(d.photo)sideKids.push(new Paragraph({children:[new ImageRun({data:u8(d.photo),type:'jpg',transformation:{width:140,height:175}})],bidirectional:rtl,alignment:AlignmentType.START,spacing:{after:120}}));
-  T.side.forEach(k=>sideKids.push(...sec(k,true)));
-  const mainKids=[P(d.name||'',{bold:true,size:44,color:w.acc==='B8A58C'?'23282E':w.acc==='8F6A9F'?'111111':w.acc,after:20}),P(d.title||'',{size:26,color:'555555',after:160})];
-  T.main.forEach(k=>mainKids.push(...sec(k,false)));
-  const total=11906,sideW=w.sideW,mainW=total-sideW;
-  const cell=(kids,wd,fill,m)=>new TableCell({children:kids.length?kids:[new Paragraph({})],width:{size:wd,type:WidthType.DXA},borders:noB,
-    shading:fill?{type:ShadingType.CLEAR,color:'auto',fill}:undefined,margins:{top:360,bottom:360,left:m,right:m}});
-  const table=new Table({width:{size:total,type:WidthType.DXA},columnWidths:[sideW,mainW],visuallyRightToLeft:rtl,
-    borders:{top:NB,bottom:NB,left:NB,right:NB,insideHorizontal:NB,insideVertical:NB},
-    rows:[new TableRow({children:[cell(sideKids,sideW,w.side,260),cell(mainKids,mainW,null,380)]})]});
-  const sections=[{properties:{page:{margin:{top:0,right:0,bottom:0,left:0}}},children:[table,new Paragraph({children:[new TextRun({text:'',size:2})],spacing:{before:0,after:0,line:20,lineRule:'exact'}})]}];
-  if(S.incCerts&&(d.certs||[]).length){
-    sections.push({properties:{page:{margin:{top:720,right:720,bottom:720,left:720}}},children:[P(L[lang].certs,{bold:true,size:32,after:200}),
-      ...d.certs.map(c=>new Paragraph({children:[new ImageRun({data:u8(c.src),type:'jpg',transformation:{width:520,height:Math.round(520*c.h/c.w)}})],spacing:{after:200}}))]});
-  }
-  return Packer.toBlob(new Document({sections}));
+  const {Document,Packer,Paragraph,ImageRun}=D;
+  const images=await pagesAsImages();
+  const children=images.map((src,i)=>new Paragraph({children:[new ImageRun({data:u8(src),type:'jpg',transformation:{width:790,height:1118}})],alignment:D.AlignmentType.CENTER,spacing:{before:0,after:0},pageBreakBefore:i>0}));
+  const section={properties:{page:{size:{width:11906,height:16838},margin:{top:0,right:0,bottom:0,left:0}}},children};
+  return Packer.toBlob(new Document({sections:[section]}));
 }
 $('#dl-docx').onclick=async()=>{
   const b=$('#dl-docx');b.disabled=true;status('بجهّز ملف Word...');
-  try{const blob=await makeDocx();await saveFile(fname('docx'),blob);status('تم تجهيز ملف Word. هو نص قابل للتعديل ومناسب لـ ATS.','ok')}
+  try{const blob=await makeDocx();await saveFile(fname('docx'),blob);status('تم تجهيز Word مطابق للمعاينة كصفحات صور.','ok')}
   catch(e){console.error(e);status(errMsg(e),e&&e.code==='declined'?'':'err')}finally{b.disabled=false}
 };
 
 /* ---------- boot ---------- */
-$('#wa-num').value=lsGet('rc:wa')||'';
+$('#wa-num').value=lsGet('rc:wa')||'';$('#client-phone').addEventListener('input',()=>{if(!$('#wa-num').value)updateWA()});
 buildTpls();buildForm();renderSaved();if(S.color)$('#cv-color').value=S.color;
 $('#lang-ar').setAttribute('aria-pressed',S.lang==='ar');$('#lang-en').setAttribute('aria-pressed',S.lang==='en');
 renderPreview();
